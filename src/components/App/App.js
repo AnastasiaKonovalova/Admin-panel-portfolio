@@ -8,7 +8,7 @@ const StyledTitle = styled.h1`
 `;
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <StyledTitle>My React App!</StyledTitle>

@@ -1,12 +1,12 @@
-module.exports = function() {
+module.exports = function () {
   return {
-    mode: "development",
-    devtool: "source-map",
+    mode: 'development',
+    devtool: 'source-map',
     module: {
       rules: [
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"]
+          use: ['style-loader', 'css-loader']
         }
       ]
     }

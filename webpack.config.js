@@ -9,28 +9,28 @@ const dev = require('./webpack/development.config');
 
 const PATHS = {
   source: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'build'),
+  build: path.join(__dirname, 'build')
 };
 
 const common = {
   entry: {
-    index: PATHS.source + '/index.js',
+    index: PATHS.source + '/index.js'
   },
   output: {
     path: PATHS.build,
-    filename: 'index_bundle.js',
+    filename: 'index_bundle.js'
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: PATHS.source + '/index.html',
+      template: PATHS.source + '/index.html'
     }),
     new ClearWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: 'build',
+      cleanOnceBeforeBuildPatterns: 'build'
     }),
     new MiniCSSExtractPlugin({
-      filename: './css/[name].css',
-    }),
+      filename: './css/[name].css'
+    })
   ],
   module: {
     rules: [
@@ -38,14 +38,14 @@ const common = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
-  },
+          loader: 'babel-loader'
+        }
+      }
+    ]
+  }
 };
 
-module.exports = function(env) {
+module.exports = function (env) {
   if (env === 'production') {
     return merge([common, dev()]);
   }
