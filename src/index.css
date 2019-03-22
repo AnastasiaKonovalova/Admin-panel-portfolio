@@ -1,0 +1,65 @@
+@import './fonts.css';
+
+body,
+html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'roboto', 'Arial', 'sans-serif';
+  -webkit-font-smoothing: antialiazed;
+  font-weight: 400;
+  font-size: 16px;
+  background: skyblue;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+
+ul,
+nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+textarea {
+  border: none;
+}
+input:focus {
+  outline: none;
+}
+textarea:focus {
+  outline: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
