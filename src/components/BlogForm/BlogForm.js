@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 
@@ -43,7 +43,7 @@ const BlogForm = props => {
       onSubmit={myHandleSubmit}
       validate={syncValidate}
       initialValues={initialValues}
-      render={({ handleSubmit, form, submitting, pristine, values }) => (
+      render={({ handleSubmit, form, submitting, invalid, pristine }) => (
         <Fragment>
           <StyledSubtitle>Добавить запись</StyledSubtitle>
           <StyledForm
@@ -93,7 +93,10 @@ const BlogForm = props => {
             </StyledFieldsContainer>
 
             <StyledButtonContainer>
-              <StyledButton type="submit" disabled={submitting || pristine}>
+              <StyledButton
+                type="submit"
+                disabled={submitting || pristine || invalid}
+              >
                 Добавить
               </StyledButton>
             </StyledButtonContainer>

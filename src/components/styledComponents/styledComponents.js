@@ -12,6 +12,9 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: ${colors.green};
   }
+  &:disabled {
+    background-color: ${colors.gray};
+  }
 `;
 export const StyledInput = styled.input`
   padding: 15px;
