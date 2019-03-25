@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import styled from 'styled-components';
 
@@ -7,7 +7,6 @@ import uploadImage from '../../icons/upload_image.svg';
 import {
   StyledButton,
   StyledInput,
-  StyledTextarea,
   StyledErrorSpan,
   StyledSubtitle,
 } from '../styledComponents/styledComponents';
@@ -43,21 +42,37 @@ const StyledHiddenInput = styled.input`
   position: absolute;
   visibility: hidden;
 `;
+const StyledImgContainer = styled.div`
+  background-image: ${props => `url(${props.img})`};
+  background-size: cover;
+  width: 200px;
+  height: ${props => `${props.img ? '200px' : ''}`};
+`;
 
 const WorksForm = props => {
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const initialValues = { name: '', stack: '', file: '' };
 
   const myHandleSubmit = values => {
-    console.log('myHandleSubmit', values);
+    values.file = imageFile;
+    setImagePreview(null);
+    setImageFile(null);
   };
-
   const syncValidate = values => {
     const errors = {};
-
     Object.keys(initialValues).forEach(key =>
       values[key] ? null : (errors[key] = 'Обязательное поле')
     );
     return errors;
+  };
+  const readFile = onChange => e => {
+    onChange(e);
+    setImageFile(e.target.files[0]);
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = e => setImagePreview(reader.result);
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -111,21 +126,29 @@ const WorksForm = props => {
                   </StyledFieldset>
                 )}
               </Field>
+
               <Field name="file">
-                {({ input, meta }) => (
+                {({ input: { onChange, ...input }, meta }) => (
                   <StyledFieldset>
                     <StyledLabelBlock>
                       <StyledIcon />
                       <StyledLabelText>Загрузить картинку</StyledLabelText>
-                      <StyledHiddenInput {...input} type="file" />
+                      <StyledHiddenInput
+                        onChange={readFile(onChange)}
+                        {...input}
+                        type="file"
+                      />
                     </StyledLabelBlock>
-                    {meta.error && meta.touched && (
+                    {meta.error && meta.invalid && (
                       <StyledErrorSpan>{meta.error}</StyledErrorSpan>
                     )}
                   </StyledFieldset>
                 )}
               </Field>
+
+              <StyledImgContainer img={imagePreview} />
             </StyledFieldsContainer>
+
             <StyledButtonContainer>
               <StyledButton
                 type="submit"

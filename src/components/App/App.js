@@ -8,8 +8,6 @@ import AboutPage from '../AboutPage';
 import BlogPage from '../BlogPage';
 import WorksPage from '../WorksPage';
 
-import { colors } from '../../utilities/colors';
-
 import bgImage from '../../img/admin_bg.jpg';
 
 const StyledContainer = styled.div`
