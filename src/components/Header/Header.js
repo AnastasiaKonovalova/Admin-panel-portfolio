@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { colors } from '../../utilities/colors';
+import { media } from '../styledComponents/media';
 
 const StyledContainer = styled.header`
   background-color: ${colors.lightGreen};
@@ -9,12 +10,27 @@ const StyledContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${media.phone`
+    padding: 15px;
+    flex-direction: column-reverse;
+    align-items: center;
+  `}
 `;
 
 const StyledHeader = styled.h1`
   font-size: 28px;
   font-weight: 500;
   color: ${colors.white};
+
+  ${media.tablet`
+    font-size: 21px;
+  `}
+
+  ${media.phone`
+    text-align: center;
+    margin-top: 10px;
+  `}
 `;
 
 const StyledLink = styled.a`
@@ -27,6 +43,10 @@ const StyledLink = styled.a`
     color: ${colors.white};
     border-bottom: 1px solid ${colors.white};
   }
+
+  ${media.tablet`
+    border-bottom: 1px solid ${colors.white07};
+  `}
 `;
 
 const Header = props => {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Field } from 'react-final-form';
 
 import { colors } from '../../../utilities/colors';
+import { media } from '../../styledComponents/media';
 import editIcon from '../../../icons/edit.svg';
 
 const StyledSkillItem = styled.li`
@@ -17,6 +18,7 @@ const StyledTextInput = styled.input`
   border: none;
   border-radius: 3px;
   padding: 8px 8px;
+  width: 180px;
   margin: 0 10px;
   color: ${colors.grayGreen};
   text-transform: capitalize;
@@ -24,6 +26,10 @@ const StyledTextInput = styled.input`
   &:read-only {
     background: ${colors.white07};
   }
+
+  ${media.phone`
+    width: 120px;
+  `}
 `;
 const StyledEditButton = styled.button`
   background-image: url(${editIcon});

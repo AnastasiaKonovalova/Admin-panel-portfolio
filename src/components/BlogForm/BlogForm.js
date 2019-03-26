@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 
+import { media } from '../styledComponents/media';
+
 import {
   StyledButton,
   StyledInput,

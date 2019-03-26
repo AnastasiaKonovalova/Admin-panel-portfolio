@@ -3,6 +3,7 @@ import { Form, Field } from 'react-final-form';
 import styled from 'styled-components';
 
 import { colors } from '../../utilities/colors';
+import { media } from '../styledComponents/media';
 import uploadImage from '../../icons/upload_image.svg';
 import {
   StyledButton,
@@ -18,6 +19,10 @@ const StyledFieldsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  ${media.phone`
+    align-items: center;
+  `}
 `;
 const StyledButtonContainer = styled.div`
   margin-top: 10px;
@@ -48,6 +53,11 @@ const StyledImgContainer = styled.div`
   width: 200px;
   height: ${props => `${props.img ? '200px' : '0px'}`};
   transition: height 0.5s;
+
+  ${media.phone`
+    width: 150px;
+    height: ${props => `${props.img ? '150px' : '0px'}`};
+  `}
 `;
 
 const WorksForm = props => {

@@ -1,5 +1,7 @@
-import { colors } from '../../utilities/colors';
 import styled from 'styled-components';
+
+import { colors } from '../../utilities/colors';
+import { media } from '../styledComponents/media';
 
 export const StyledButton = styled.button`
   padding: 15px;
@@ -22,6 +24,13 @@ export const StyledInput = styled.input`
   border-radius: 3px;
   width: 300px;
   color: ${colors.grayMedium};
+
+  ${media.tablet`
+    margin-right: 0;
+  `}
+  ${media.phone`
+    width: 100%;
+  `}
 `;
 export const StyledTextarea = styled.textarea`
   padding: 15px;
@@ -32,14 +41,31 @@ export const StyledTextarea = styled.textarea`
   resize: none;
   color: ${colors.grayMedium};
   flex: 1;
+
+  ${media.tablet`
+  margin-right: 0;
+    width: 500px;
+    height: 300px;
+  `}
+
+  ${media.phone`
+    width: 100%;
+    height: 250px;
+  `}
+  ${media.phoneLandscape`
+    width: 100%;
+    height: 200px;
+  `}
 `;
 
 export const StyledErrorSpan = styled.span`
   color: ${colors.red};
-  font-weight: 400;
+  font-weight: 300;
+  font-size: 13px;
   position: absolute;
-  top: 105%;
+  top: 100%;
   left: 0;
+  transform: translateY(10%);
 `;
 
 export const StyledSubtitle = styled.h3`
@@ -55,4 +81,8 @@ export const StyledTitle = styled.h2`
   font-weight: 500;
   margin-top: 30px;
   margin-left: 30px;
+
+  ${media.phone`
+    margin-left: 10px;
+  `}
 `;

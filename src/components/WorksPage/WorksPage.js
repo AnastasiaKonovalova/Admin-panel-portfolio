@@ -7,9 +7,6 @@ import {
 
 import { StyledTitle } from '../styledComponents/styledComponents';
 
-import styled from 'styled-components';
-import { colors } from '../../utilities/colors';
-
 import WorksForm from '../WorksForm';
 
 const WorksPage = props => {

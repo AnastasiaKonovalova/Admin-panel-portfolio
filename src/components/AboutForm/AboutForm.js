@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Form } from 'react-final-form';
 
 import { StyledButton } from '../styledComponents/styledComponents';
-
 import { StyledForm } from '../styledComponents/styledLayouts';
+import { media } from '../styledComponents/media';
 
 import SkillBlock from './SkillBlock';
 
@@ -16,10 +16,22 @@ const StyledFieldsContainer = styled.div`
   flex-wrap: wrap;
   height: 400px;
   width: 100%;
+
+  ${media.tablet`
+    height: 600px;
+  `}
+
+  ${media.phone`
+    padding: 0 10px;
+  `}
 `;
 const StyledButtonContainer = styled.div`
   margin-top: 10px;
   margin-left: 30px;
+
+  ${media.phone`
+    margin-left: 10px;
+  `}
 `;
 
 const AboutForm = ({ skills }) => {

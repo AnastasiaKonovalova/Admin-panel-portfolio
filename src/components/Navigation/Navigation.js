@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 import { colors } from '../../utilities/colors';
+import { media } from '../styledComponents/media';
 
 const StyledLink = styled(NavLink)`
   text-transform: uppercase;
@@ -10,8 +11,19 @@ const StyledLink = styled(NavLink)`
   min-width: 180px;
   background-color: ${colors.ligthGray};
   color: ${colors.green};
-  border-right: 1px solid ${colors.white};
   text-align: center;
+  flex: 1;
+  &:not(:last-of-type) {
+    border-right: 1px solid ${colors.white};
+  }
+
+  ${media.phone`
+    width: 100%;
+    border-right: none;
+    &:not(:last-of-type){
+      border-bottom: 1px solid ${colors.white};
+    }
+  `}
 `;
 
 const activeStyle = {
@@ -23,6 +35,11 @@ const StyledNavigationPanel = styled.div`
   display: flex;
   justify-content: flex-start;
   background-color: ${colors.ligthGray};
+
+  ${media.phone`
+    flex-direction: column;
+    align-items: center;
+  `}
 `;
 
 const Navigation = props => {

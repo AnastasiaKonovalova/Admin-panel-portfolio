@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../styledComponents/media';
 
 export const StyledMaincontent = styled.div`
   width: 100%;
@@ -8,15 +9,31 @@ export const StyledMaincontent = styled.div`
   align-items: stretch;
   position: relative;
   flex: 1;
+
+  ${media.tablet`
+    flex-direction: column;
+  `}
 `;
 
 export const StyledColumn = styled.div`
   width: 50%;
   height: 100%;
-  margin: 0 30px;
+  padding: 0 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  ${media.tablet`
+    width: 100%;
+  `}
+
+  ${media.phoneLandscape`
+    width: 100%;
+  `}
+
+  ${media.phone`
+    padding: 0 10px;
+  `}
 `;
 
 export const StyledForm = styled.form`
