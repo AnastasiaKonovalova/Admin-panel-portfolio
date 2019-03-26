@@ -1,0 +1,53 @@
+[
+  {
+    "type": "frontend",
+    "skills": [
+      {
+        "skill": "HTML",
+        "percent": 90
+      },
+      {
+        "skill": "CSS",
+        "percent": 80
+      },
+      {
+        "skill": "javascript",
+        "percent": 65
+      }
+    ]
+  },
+  {
+    "type": "backend",
+    "skills": [
+      {
+        "skill": "PHP",
+        "percent": 10
+      },
+      {
+        "skill": "node.js",
+        "percent": 20
+      },
+      {
+        "skill": "mongo.db",
+        "percent": 15
+      }
+    ]
+  },
+  {
+    "type": "workflow",
+    "skills": [
+      {
+        "skill": "git",
+        "percent": 50
+      },
+      {
+        "skill": "gulp",
+        "percent": 35
+      },
+      {
+        "skill": "bower",
+        "percent": 5
+      }
+    ]
+  }
+]

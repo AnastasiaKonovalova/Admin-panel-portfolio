@@ -46,7 +46,8 @@ const StyledImgContainer = styled.div`
   background-image: ${props => `url(${props.img})`};
   background-size: cover;
   width: 200px;
-  height: ${props => `${props.img ? '200px' : ''}`};
+  height: ${props => `${props.img ? '200px' : '0px'}`};
+  transition: height 0.5s;
 `;
 
 const WorksForm = props => {

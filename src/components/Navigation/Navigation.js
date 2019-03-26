@@ -6,7 +6,7 @@ import { colors } from '../../utilities/colors';
 
 const StyledLink = styled(NavLink)`
   text-transform: uppercase;
-  padding: 25px;
+  padding: 20px 25px;
   min-width: 180px;
   background-color: ${colors.ligthGray};
   color: ${colors.green};

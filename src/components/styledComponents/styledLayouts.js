@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledMaincontent = styled.div`
   width: 100%;
   height: 100%;
-  margin: 40px 0;
+  margin: 30px 0;
   display: flex;
   align-items: stretch;
   position: relative;
@@ -32,6 +32,6 @@ export const StyledFieldset = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
 `;

@@ -28,7 +28,7 @@ export const StyledTextarea = styled.textarea`
   margin-right: 10px;
   border-radius: 3px;
   width: 100%;
-  height: 170px;
+  height: 140px;
   resize: none;
   color: ${colors.grayMedium};
   flex: 1;
@@ -45,13 +45,14 @@ export const StyledErrorSpan = styled.span`
 export const StyledSubtitle = styled.h3`
   color: ${colors.grayGreen};
   margin-bottom: 20px;
-  font-weight: 400;
+  font-weight: 500;
+  text-transform: capitalize;
 `;
 
 export const StyledTitle = styled.h2`
   font-size: 21px;
   color: ${colors.grayGreen};
-  font-weight: 400;
-  margin-top: 50px;
+  font-weight: 500;
+  margin-top: 30px;
   margin-left: 30px;
 `;

@@ -1,10 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Fragment, useEffect } from 'react';
 
-import { colors } from '../../utilities/colors';
+import { StyledMaincontent } from '../styledComponents/styledLayouts';
+import { StyledTitle } from '../styledComponents/styledComponents';
+import AboutForm from '../AboutForm';
+import skills from './skills.json';
 
 const AboutPage = props => {
-  return <div>AboutPage</div>;
+  return (
+    <Fragment>
+      <StyledTitle>Страница «Обо мне»</StyledTitle>
+      <StyledMaincontent>
+        <AboutForm skills={skills} />
+      </StyledMaincontent>
+    </Fragment>
+  );
 };
 
 export default AboutPage;
