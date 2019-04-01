@@ -9,13 +9,13 @@ module.exports = function() {
         {
           test: /\.css$/,
           use: [
-            {
-              loader: MiniCSSExtractPlugin.loader,
-              options: {
-                publicPath: '../',
-              },
-            },
-            // 'style-loader',
+            // {
+            //   loader: MiniCSSExtractPlugin.loader,
+            //   options: {
+            //     publicPath: '../',
+            //   },
+            // },
+            'style-loader',
             'css-loader',
           ],
         },

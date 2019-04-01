@@ -1,7 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const ClearWebpackPlugin = require('clean-webpack-plugin');
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const prod = require('./webpack/production.config');
@@ -31,9 +31,9 @@ const common = {
     new ClearWebpackPlugin({
       cleanOnceBeforeBuildPatterns: 'build',
     }),
-    new MiniCSSExtractPlugin({
-      filename: './css/[name].css',
-    }),
+    // new MiniCSSExtractPlugin({
+    //   filename: './css/[name].css',
+    // }),
   ],
   module: {
     rules: [
@@ -62,7 +62,7 @@ const common = {
 
 module.exports = function(env) {
   if (env === 'production') {
-    return merge([common, dev()]);
+    return merge([common, prod()]);
   }
   if (env === 'development') {
     return merge([common, dev()]);
