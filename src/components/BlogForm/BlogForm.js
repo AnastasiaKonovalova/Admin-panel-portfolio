@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
+import axios from 'axios';
 
 import { media } from '../styledComponents/media';
 
@@ -14,6 +15,10 @@ import {
 
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
 
+const myHttp = axios.create({
+  baseURL: 'http://localhost:3000/api',
+});
+
 const StyledFieldsContainer = styled.div`
   width: 100%;
   display: flex;
@@ -25,10 +30,23 @@ const StyledButtonContainer = styled.div`
 `;
 
 const BlogForm = props => {
-  const initialValues = { title: '', date: '', content: '' };
+  const initialValues = { title: '', date: '', text: '' };
 
   const myHandleSubmit = values => {
     console.log('myHandleSubmit', values);
+    myHttp
+      .post('/blog', {
+        title: values.title,
+        date: values.date,
+        text: values.text,
+        mode: 'cors',
+      })
+      .then(function(response) {
+        console.log('BlogForm submit response', response);
+      })
+      .catch(function(error) {
+        console.log('BlogForm submit error', error);
+      });
   };
 
   const syncValidate = values => {
@@ -82,7 +100,7 @@ const BlogForm = props => {
                 )}
               </Field>
 
-              <Field name="content">
+              <Field name="text">
                 {({ input, meta }) => (
                   <StyledFieldset>
                     <StyledTextarea {...input} placeholder="Содержание" />
