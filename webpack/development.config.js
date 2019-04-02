@@ -4,6 +4,10 @@ module.exports = function() {
   return {
     mode: 'development',
     devtool: 'source-map',
+    devServer: {
+      publicPath: 'http://localhost:8080/admin/',
+      openPage: 'admin/',
+    },
     module: {
       rules: [
         {

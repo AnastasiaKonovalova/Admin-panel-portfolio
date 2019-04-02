@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
-import axios from 'axios';
-
-import { media } from '../styledComponents/media';
 
 import {
   StyledButton,
@@ -12,12 +9,8 @@ import {
   StyledErrorSpan,
   StyledSubtitle,
 } from '../styledComponents/styledComponents';
-
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
-
-const myHttp = axios.create({
-  baseURL: 'http://localhost:3000/api',
-});
+import { apiRequest } from '../../utilities/axiosConfig';
 
 const StyledFieldsContainer = styled.div`
   width: 100%;
@@ -30,11 +23,12 @@ const StyledButtonContainer = styled.div`
 `;
 
 const BlogForm = props => {
+  const { renderResponse } = props;
   const initialValues = { title: '', date: '', text: '' };
 
   const myHandleSubmit = values => {
-    console.log('myHandleSubmit', values);
-    myHttp
+    // console.log('myHandleSubmit', values);
+    apiRequest
       .post('/blog', {
         title: values.title,
         date: values.date,
@@ -43,9 +37,12 @@ const BlogForm = props => {
       })
       .then(response => {
         console.log('BlogForm submit response', response);
+        const { message } = response.data;
+        renderResponse(message);
       })
       .catch(error => {
         console.log('BlogForm submit error', error);
+        renderResponse(`Произошла ошибка: ${error.message}`);
       });
   };
 

@@ -8,4 +8,5 @@ export const colors = {
   white: '#fff',
   red: '#e44845',
   white07: 'rgba(255, 255, 255, 0.7)',
+  black05: 'rgba(160, 160, 160, 0.5)',
 };
