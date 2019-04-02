@@ -45,13 +45,13 @@ const StyledNavigationPanel = styled.div`
 const Navigation = props => {
   return (
     <StyledNavigationPanel>
-      <StyledLink to="/edit-about" activeStyle={activeStyle}>
+      <StyledLink to="/admin/edit-about" activeStyle={activeStyle}>
         Обо мне
       </StyledLink>
-      <StyledLink to="/edit-works" activeStyle={activeStyle}>
+      <StyledLink to="/admin/edit-works" activeStyle={activeStyle}>
         Мои работы
       </StyledLink>
-      <StyledLink to="/edit-blog" activeStyle={activeStyle}>
+      <StyledLink to="/admin/edit-blog" activeStyle={activeStyle}>
         Блог
       </StyledLink>
     </StyledNavigationPanel>

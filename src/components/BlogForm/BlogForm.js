@@ -41,10 +41,10 @@ const BlogForm = props => {
         text: values.text,
         mode: 'cors',
       })
-      .then(function(response) {
+      .then(response => {
         console.log('BlogForm submit response', response);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log('BlogForm submit error', error);
       });
   };

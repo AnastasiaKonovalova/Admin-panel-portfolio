@@ -31,10 +31,10 @@ const App = props => {
         <Navigation />
         <StyledContainer>
           <Switch>
-            <Route path="/edit-about" component={AboutPage} />
-            <Redirect from="/" exact to="/edit-about" />
-            <Route path="/edit-works" component={WorksPage} />
-            <Route path="/edit-blog" component={BlogPage} />
+            <Route path="/admin/edit-about" component={AboutPage} />
+            <Redirect from="/admin" exact to="/admin/edit-about" />
+            <Route path="/admin/edit-works" component={WorksPage} />
+            <Route path="/admin/edit-blog" component={BlogPage} />
           </Switch>
         </StyledContainer>
       </BrowserRouter>
