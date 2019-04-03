@@ -1,7 +1,6 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const ClearWebpackPlugin = require('clean-webpack-plugin');
-// const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const prod = require('./webpack/production.config');
@@ -31,9 +30,6 @@ const common = {
     new ClearWebpackPlugin({
       cleanOnceBeforeBuildPatterns: 'build',
     }),
-    // new MiniCSSExtractPlugin({
-    //   filename: './css/[name].css',
-    // }),
   ],
   module: {
     rules: [

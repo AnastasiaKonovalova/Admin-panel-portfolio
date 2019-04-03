@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 import { apiRequest } from '../../utilities/axiosConfig';
 
@@ -14,12 +14,39 @@ import BlogList from '../BlogList';
 
 const BlogPage = props => {
   const [responseMessage, setResponseMessage] = useState('');
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
 
-  const getResponseMessage = message => {
+  useEffect(() => {
+    apiRequest
+      .get('/blog', { mode: 'cors' })
+      .then(response => {
+        const { articles } = response.data;
+        // console.log('BlogPage useEffect response.data', response.data);
+        setArticles(articles);
+      })
+      .catch(error => {
+        console.log('BlogPage useEffect error', error);
+        setError(error);
+      });
+  }, []);
+
+  const showResponseMessage = message => {
     setResponseMessage(message);
   };
   const closeResponseMessage = () => {
     setResponseMessage('');
+  };
+  const deleteArticle = id => () => {
+    apiRequest.delete(`/blog/${id}`, { mode: 'cors' }).then(response => {
+      console.log('deleteArticle response', response);
+      if (response.status !== 201) {
+        showResponseMessage(response.data.message);
+        return;
+      }
+      setArticles(articles.filter(article => article._id !== id));
+      showResponseMessage(response.data.message);
+    });
   };
 
   return (
@@ -33,10 +60,14 @@ const BlogPage = props => {
           />
         ) : null}
         <StyledColumn>
-          <BlogForm renderResponse={getResponseMessage} />
+          <BlogForm renderResponse={showResponseMessage} />
         </StyledColumn>
         <StyledColumn>
-          <BlogList />
+          {error ? (
+            <div>Произошла ошибка: {error}</div>
+          ) : (
+            <BlogList articles={articles} deleteArticle={deleteArticle} />
+          )}
         </StyledColumn>
       </StyledMaincontent>
     </Fragment>

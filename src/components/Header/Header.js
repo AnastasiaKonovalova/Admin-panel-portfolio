@@ -53,7 +53,7 @@ const Header = props => {
   return (
     <StyledContainer>
       <StyledHeader>Панель администрирования</StyledHeader>
-      <StyledLink href="/">Вернуться на сайт</StyledLink>
+      <StyledLink href="http://localhost:3000/">Вернуться на сайт</StyledLink>
     </StyledContainer>
   );
 };

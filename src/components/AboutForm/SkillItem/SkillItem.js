@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 
 import { colors } from '../../../utilities/colors';
 import { media } from '../../styledComponents/media';
-import editIcon from '../../../icons/edit.svg';
+import { StyledEditButton } from '../../styledComponents/styledComponents';
 
 const StyledSkillItem = styled.li`
   display: flex;
@@ -30,13 +30,6 @@ const StyledTextInput = styled.input`
   ${media.phone`
     width: 120px;
   `}
-`;
-const StyledEditButton = styled.button`
-  background-image: url(${editIcon});
-  background-size: cover;
-  width: 20px;
-  height: 20px;
-  margin-right: 20px;
 `;
 const StyledPercentBlock = styled.div`
   display: flex;

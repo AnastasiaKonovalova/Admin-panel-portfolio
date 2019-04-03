@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { colors } from '../../utilities/colors';
 import { media } from '../styledComponents/media';
+import editIcon from '../../icons/edit.svg';
+import closeIcon from '../../icons/close.svg';
 
 export const StyledButton = styled.button`
   padding: 15px;
@@ -17,6 +19,22 @@ export const StyledButton = styled.button`
   &:disabled {
     background-color: ${colors.gray};
   }
+`;
+export const StyledEditButton = styled.button`
+  background-image: url(${editIcon});
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-right: 20px;
+`;
+export const StyledCloseButton = styled.button`
+  background-image: url(${closeIcon});
+  background-size: cover;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-right: 20px;
 `;
 export const StyledInput = styled.input`
   padding: 15px;
