@@ -37,7 +37,7 @@ export const StyledCloseButton = styled.button`
   margin-right: 20px;
 `;
 export const StyledInput = styled.input`
-  padding: 15px;
+  padding: 10px;
   margin-right: 10px;
   border-radius: 3px;
   width: 300px;

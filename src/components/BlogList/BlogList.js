@@ -1,16 +1,17 @@
 import React from 'react';
 
+import { StyledList } from '../styledComponents/styledLayouts';
 import Item from '../Item';
 
 const BlogList = props => {
   const { articles, deleteArticle } = props;
 
   return (
-    <ul>
+    <StyledList>
       {articles.map(article => (
         <Item content={article} key={article._id} deleteItem={deleteArticle} />
       ))}
-    </ul>
+    </StyledList>
   );
 };
 

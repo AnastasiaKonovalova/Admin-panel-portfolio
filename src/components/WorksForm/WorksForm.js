@@ -51,13 +51,15 @@ const StyledHiddenInput = styled.input`
 const StyledImgContainer = styled.div`
   background-image: ${props => `url(${props.img})`};
   background-size: cover;
-  width: 200px;
-  height: ${props => `${props.img ? '200px' : '0px'}`};
+  width: 180px;
+  height: 180px;
+  border: 1px dashed ${colors.gray};
+  border-radius: 3px;
   transition: height 0.5s;
 
   ${media.phone`
     width: 150px;
-    height: ${props => `${props.img ? '150px' : '0px'}`};
+    height: 150px;
   `}
 `;
 

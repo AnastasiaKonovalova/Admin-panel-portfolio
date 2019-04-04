@@ -36,6 +36,16 @@ export const StyledColumn = styled.div`
   `}
 `;
 
+export const StyledList = styled.ul`
+  ${media.tablet`
+    padding-top: 20px;
+  `}
+
+  ${media.phoneLandscape`
+  padding-top: 20px;
+  `}
+`;
+
 export const StyledForm = styled.form`
   width: 100%;
   height: 100%;
@@ -49,6 +59,6 @@ export const StyledFieldset = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   position: relative;
 `;
