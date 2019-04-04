@@ -27,7 +27,6 @@ const BlogForm = props => {
   const initialValues = { title: '', date: '', text: '' };
 
   const myHandleSubmit = values => {
-    // console.log('myHandleSubmit', values);
     apiRequest
       .post('/blog', {
         title: values.title,

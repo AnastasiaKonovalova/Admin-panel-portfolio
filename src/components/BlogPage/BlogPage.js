@@ -64,7 +64,7 @@ const BlogPage = props => {
         </StyledColumn>
         <StyledColumn>
           {error ? (
-            <div>Произошла ошибка: {error}</div>
+            <div>Произошла ошибка загрузки: {error}</div>
           ) : (
             <BlogList articles={articles} deleteArticle={deleteArticle} />
           )}

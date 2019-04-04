@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { colors } from '../../utilities/colors';
 import { media } from '../styledComponents/media';
-import uploadImage from '../../icons/upload_image.svg';
+import uploadIcon from '../../icons/upload_image.svg';
 import {
   StyledButton,
   StyledInput,
@@ -13,6 +13,7 @@ import {
 } from '../styledComponents/styledComponents';
 
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
+import { apiRequest } from '../../utilities/axiosConfig';
 
 const StyledFieldsContainer = styled.div`
   width: 100%;
@@ -28,7 +29,7 @@ const StyledButtonContainer = styled.div`
   margin-top: 10px;
 `;
 const StyledIcon = styled.div`
-  background-image: url(${uploadImage});
+  background-image: url(${uploadIcon});
   background-size: cover;
   width: 35px;
   height: 35px;
@@ -61,12 +62,33 @@ const StyledImgContainer = styled.div`
 `;
 
 const WorksForm = props => {
+  const { renderResponse } = props;
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const initialValues = { name: '', stack: '', file: '' };
+  const initialValues = { title: '', stack: '', file: '', url: '' };
 
   const myHandleSubmit = values => {
     values.file = imageFile;
+
+    const data = new FormData();
+    data.set('url', values.url);
+    data.set('stack', values.stack);
+    data.set('title', values.title);
+    data.set('img', values.file);
+    data.set('filename', values.file.name);
+
+    apiRequest
+      .post('/works', data)
+      .then(response => {
+        const { message } = response.data;
+        renderResponse(message);
+        console.log('WorksForm myHandleSubmit response', response);
+      })
+      .catch(error => {
+        renderResponse(`Произошла ошибка: ${error.message}`);
+        console.log('WorksForm myHandleSubmit error', error);
+      });
+
     setImagePreview(null);
     setImageFile(null);
   };
@@ -102,6 +124,7 @@ const WorksForm = props => {
         <Fragment>
           <StyledSubtitle>Добавить работу</StyledSubtitle>
           <StyledForm
+            enctype="multipart/form-data"
             onSubmit={e => {
               e.preventDefault();
               handleSubmit();
@@ -109,7 +132,7 @@ const WorksForm = props => {
             }}
           >
             <StyledFieldsContainer>
-              <Field name="name">
+              <Field name="title">
                 {({ input, meta }) => (
                   <StyledFieldset>
                     <StyledInput
@@ -129,6 +152,20 @@ const WorksForm = props => {
                     <StyledInput
                       {...input}
                       placeholder="Технологии"
+                      type="text"
+                    />
+                    {meta.error && meta.touched && (
+                      <StyledErrorSpan>{meta.error}</StyledErrorSpan>
+                    )}
+                  </StyledFieldset>
+                )}
+              </Field>
+              <Field name="url">
+                {({ input, meta }) => (
+                  <StyledFieldset>
+                    <StyledInput
+                      {...input}
+                      placeholder="Ссылка на работу"
                       type="text"
                     />
                     {meta.error && meta.touched && (
