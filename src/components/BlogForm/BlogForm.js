@@ -23,7 +23,7 @@ const StyledButtonContainer = styled.div`
 `;
 
 const BlogForm = props => {
-  const { renderResponse } = props;
+  const { renderResponse, addArticleToState } = props;
   const initialValues = { title: '', date: '', text: '' };
 
   const myHandleSubmit = values => {
@@ -36,8 +36,9 @@ const BlogForm = props => {
       })
       .then(response => {
         console.log('BlogForm submit response', response);
-        const { message } = response.data;
+        const { message, article } = response.data;
         renderResponse(message);
+        addArticleToState(article);
       })
       .catch(error => {
         console.log('BlogForm submit error', error);

@@ -64,7 +64,7 @@ const StyledImgContainer = styled.div`
 `;
 
 const WorksForm = props => {
-  const { renderResponse } = props;
+  const { renderResponse, addWorkToState } = props;
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const initialValues = { title: '', stack: '', file: '', url: '' };
@@ -77,14 +77,14 @@ const WorksForm = props => {
     data.set('stack', values.stack);
     data.set('title', values.title);
     data.set('img', values.file);
-    data.set('filename', values.file.name);
 
     apiRequest
       .post('/works', data)
       .then(response => {
-        const { message } = response.data;
+        const { message, work } = response.data;
         renderResponse(message);
         console.log('WorksForm myHandleSubmit response', response);
+        addWorkToState(work);
       })
       .catch(error => {
         renderResponse(`Произошла ошибка: ${error.message}`);

@@ -37,6 +37,9 @@ const BlogPage = props => {
   const closeResponseMessage = () => {
     setResponseMessage('');
   };
+  const addArticleToState = article => {
+    setArticles([...articles, article]);
+  };
   const deleteArticle = id => () => {
     apiRequest.delete(`/blog/${id}`, { mode: 'cors' }).then(response => {
       console.log('deleteArticle response', response);
@@ -60,7 +63,10 @@ const BlogPage = props => {
           />
         ) : null}
         <StyledColumn>
-          <BlogForm renderResponse={showResponseMessage} />
+          <BlogForm
+            renderResponse={showResponseMessage}
+            addArticleToState={addArticleToState}
+          />
         </StyledColumn>
         <StyledColumn>
           {error ? (

@@ -37,7 +37,9 @@ const WorksPage = props => {
   const closeResponseMessage = () => {
     setResponseMessage('');
   };
-
+  const addWorkToState = work => {
+    setWorks([...works, work]);
+  };
   const deleteWork = id => () => {
     apiRequest.delete(`/works/${id}`, { mode: 'cors' }).then(response => {
       console.log('deleteWork response', response);
@@ -61,7 +63,10 @@ const WorksPage = props => {
           />
         ) : null}
         <StyledColumn>
-          <WorksForm renderResponse={showResponseMessage} />
+          <WorksForm
+            renderResponse={showResponseMessage}
+            addWorkToState={addWorkToState}
+          />
         </StyledColumn>
         <StyledColumn>
           {error ? (
