@@ -4,7 +4,12 @@ import { Field } from 'react-final-form';
 
 import { colors } from '../../../utilities/colors';
 import { media } from '../../styledComponents/media';
-import { StyledEditButton } from '../../styledComponents/styledComponents';
+import {
+  StyledEditButton,
+  StyledCloseButton,
+} from '../../styledComponents/styledComponents';
+
+import PercentBlock from '../../PercentBlock';
 
 const StyledSkillItem = styled.li`
   display: flex;
@@ -31,42 +36,12 @@ const StyledTextInput = styled.input`
     width: 120px;
   `}
 `;
-const StyledPercentBlock = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-const StyledPercentInput = styled.input`
-  width: 50px;
-  border-radius: 3px;
-  padding: 8px 12px;
-  text-align: center;
-  color: ${colors.grayGreen};
-`;
-const StyledPercentText = styled.div`
-  margin-left: 10px;
-  color: ${colors.green};
-`;
 
-const SkillItem = ({ skill, percent }) => {
+const SkillItem = ({ skill, percent, deleteSkill }) => {
   const [isSkillDisabled, setSkillDisabled] = useState(true);
   const handleEditButtonClick = e => {
     e.preventDefault();
     setSkillDisabled(false);
-  };
-
-  const numberNormalizer = value => {
-    if (!value || !value.trim) return '';
-    const onlyNums = value.replace(/[^\d]/g, '');
-    return onlyNums;
-  };
-  const numberFormatter = value => {
-    if (!value) return 0;
-    if (value % 5 > 0) {
-      return Math.round(value / 5) * 5;
-    } else {
-      return value;
-    }
   };
 
   return (
@@ -82,19 +57,8 @@ const SkillItem = ({ skill, percent }) => {
         )}
       </Field>
       <StyledEditButton onClick={handleEditButtonClick} />
-      <StyledPercentBlock>
-        <Field
-          name={`${skill}_percent`}
-          initialValue={percent}
-          parse={numberNormalizer}
-          format={numberFormatter}
-          formatOnBlur
-        >
-          {({ input }) => <StyledPercentInput {...input} type="text" />}
-        </Field>
-
-        <StyledPercentText>%</StyledPercentText>
-      </StyledPercentBlock>
+      <StyledCloseButton onClick={deleteSkill} />
+      <PercentBlock skill={skill} percent={percent} />
     </StyledSkillItem>
   );
 };

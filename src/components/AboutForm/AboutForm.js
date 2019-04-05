@@ -28,13 +28,18 @@ const StyledFieldsContainer = styled.div`
 const StyledButtonContainer = styled.div`
   margin-top: 10px;
   margin-left: 30px;
+  display: flex;
+  align-items: center;
 
   ${media.phone`
     margin-left: 10px;
   `}
 `;
+const PositionedStyledButton = styled(StyledButton)`
+  margin-right: 30px;
+`;
 
-const AboutForm = ({ skills }) => {
+const AboutForm = ({ skills, deleteSkill, showAddSkillForm }) => {
   const myHandleSubmit = values => {
     console.log('myHandleSubmit', values);
   };
@@ -56,14 +61,21 @@ const AboutForm = ({ skills }) => {
                   key={skill.type}
                   type={skill.type}
                   skills={skill.skills}
+                  deleteSkill={deleteSkill}
                 />
               ))}
             </StyledFieldsContainer>
 
             <StyledButtonContainer>
-              <StyledButton type="submit" disabled={submitting || pristine}>
+              <PositionedStyledButton
+                type="submit"
+                disabled={submitting || pristine}
+              >
                 Сохранить
-              </StyledButton>
+              </PositionedStyledButton>
+              <PositionedStyledButton onClick={showAddSkillForm}>
+                Добавить новую запись
+              </PositionedStyledButton>
             </StyledButtonContainer>
           </StyledForm>
         </Fragment>
