@@ -71,9 +71,31 @@ const StyledInput = styled.input`
   `}
 `;
 
-const AddSkillForm = ({ closeAddSkillForm }) => {
+const AddSkillForm = ({ closeAddSkillForm, renderResponse }) => {
   const myHandleSubmit = values => {
     console.log('AddSkillForm values', values);
+    apiRequest
+      .post(
+        '/skills',
+        {
+          type: values.type,
+          percent: +values._percent,
+          skill: values.skill,
+        },
+        { mode: 'cors' }
+      )
+      .then(response => {
+        console.log('AddSkillForm submit response', response);
+        const { message, skill } = response.data;
+        renderResponse(message);
+      })
+      .catch(error => {
+        console.log('AddSkillForm submit error', error);
+        renderResponse(`Произошла ошибка: ${error.message}`);
+      })
+      .finally(() => {
+        closeAddSkillForm();
+      });
   };
 
   const handleReset = form => e => {

@@ -7,6 +7,7 @@ import {
   StyledButton,
 } from '../styledComponents/styledComponents';
 import { media } from '../styledComponents/media';
+import { apiRequest } from '../../utilities/axiosConfig';
 
 import AboutForm from '../AboutForm';
 import ResponseAlert from '../ResponseAlert';
@@ -28,6 +29,22 @@ const PositionedStyledButton = styled(StyledButton)`
 const AboutPage = props => {
   const [responseMessage, setResponseMessage] = useState('');
   const [isAdding, setIsAdding] = useState(false);
+  const [skills, setSkills] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    apiRequest
+      .get('/skills', { mode: 'cors' })
+      .then(response => {
+        console.log('AboutPage load response', response);
+        const { skills } = response.data;
+        setSkills(skills);
+      })
+      .catch(error => {
+        console.log('AboutPage load error', error);
+        setError(error);
+      });
+  }, []);
 
   const showAddSkillForm = e => {
     e.preventDefault();
@@ -46,7 +63,7 @@ const AboutPage = props => {
 
   const deleteSkill = e => {
     e.preventDefault();
-    console.log('deleteSkill ');
+    console.log('deleteSkill ', e);
   };
 
   return (
@@ -60,7 +77,10 @@ const AboutPage = props => {
           />
         ) : null}
         {isAdding ? (
-          <AddSkillForm closeAddSkillForm={closeAddSkillForm} />
+          <AddSkillForm
+            closeAddSkillForm={closeAddSkillForm}
+            renderResponse={showResponseMessage}
+          />
         ) : null}
         <AboutForm
           skills={skills}

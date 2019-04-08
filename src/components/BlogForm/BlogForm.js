@@ -28,12 +28,15 @@ const BlogForm = props => {
 
   const myHandleSubmit = values => {
     apiRequest
-      .post('/blog', {
-        title: values.title,
-        date: values.date,
-        text: values.text,
-        mode: 'cors',
-      })
+      .post(
+        '/blog',
+        {
+          title: values.title,
+          date: values.date,
+          text: values.text,
+        },
+        { mode: 'cors' }
+      )
       .then(response => {
         console.log('BlogForm submit response', response);
         const { message, article } = response.data;
