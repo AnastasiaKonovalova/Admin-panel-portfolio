@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 
@@ -71,15 +71,18 @@ const StyledInput = styled.input`
   `}
 `;
 
-const AddSkillForm = ({ closeAddSkillForm, renderResponse }) => {
+const AddSkillForm = ({
+  closeAddSkillForm,
+  renderResponse,
+  addSkillToState,
+}) => {
   const myHandleSubmit = values => {
-    console.log('AddSkillForm values', values);
     apiRequest
       .post(
         '/skills',
         {
           type: values.type,
-          percent: +values._percent,
+          percent: +values.undefined_percent,
           skill: values.skill,
         },
         { mode: 'cors' }
@@ -87,6 +90,7 @@ const AddSkillForm = ({ closeAddSkillForm, renderResponse }) => {
       .then(response => {
         console.log('AddSkillForm submit response', response);
         const { message, skill } = response.data;
+        addSkillToState(skill);
         renderResponse(message);
       })
       .catch(error => {

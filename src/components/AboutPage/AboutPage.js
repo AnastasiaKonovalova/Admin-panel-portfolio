@@ -1,44 +1,25 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import styled from 'styled-components';
 
 import { StyledMaincontent } from '../styledComponents/styledLayouts';
-import {
-  StyledTitle,
-  StyledButton,
-} from '../styledComponents/styledComponents';
-import { media } from '../styledComponents/media';
+import { StyledTitle } from '../styledComponents/styledComponents';
 import { apiRequest } from '../../utilities/axiosConfig';
 
 import AboutForm from '../AboutForm';
 import ResponseAlert from '../ResponseAlert';
 import AddSkillForm from '../AddSkillForm';
 
-import skills from './skills.json';
-
-const PositionedStyledButton = styled(StyledButton)`
-  position: absolute;
-  top: 100%;
-  left: 30px;
-  transform: translate(100%, -200%);
-
-  ${media.tablet`
-    transform: translate(0, 50%);
-  `}
-`;
-
 const AboutPage = props => {
   const [responseMessage, setResponseMessage] = useState('');
   const [isAdding, setIsAdding] = useState(false);
-  const [skills, setSkills] = useState([]);
+  const [stacks, setStack] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     apiRequest
       .get('/skills', { mode: 'cors' })
       .then(response => {
-        console.log('AboutPage load response', response);
         const { skills } = response.data;
-        setSkills(skills);
+        setStack(skills);
       })
       .catch(error => {
         console.log('AboutPage load error', error);
@@ -46,6 +27,14 @@ const AboutPage = props => {
       });
   }, []);
 
+  const addSkillToState = newStack => {
+    const oldStack = stacks.find(stack => stack.type === newStack.type);
+    if (!oldStack) {
+      setStack([...stacks, newStack]);
+    } else {
+      oldStack.skills = newStack.skills;
+    }
+  };
   const showAddSkillForm = e => {
     e.preventDefault();
     setIsAdding(true);
@@ -61,9 +50,27 @@ const AboutPage = props => {
     setResponseMessage('');
   };
 
-  const deleteSkill = e => {
-    e.preventDefault();
-    console.log('deleteSkill ', e);
+  const removeSkillFromState = (type, id) => {
+    const editedStack = stacks.find(skill => skill.type === type);
+    const newSkills = editedStack.skills.filter(skill => skill._id !== id);
+    if (newSkills.length > 0) {
+      editedStack.skills = newSkills;
+      setStack([...stacks]);
+    } else {
+      setStack(stacks.filter(stack => stack._id !== editedStack._id));
+    }
+  };
+  const deleteSkill = (type, id) => {
+    apiRequest
+      .put(`/skills/${id}`, { type: type }, { mode: 'cors' })
+      .then(response => {
+        console.log('deleteSkill response', response);
+        removeSkillFromState(type, id);
+      })
+      .catch(error => {
+        console.log('deleteSkill put error', error);
+        showResponseMessage(`Произошла ошибка: ${error.message}`);
+      });
   };
 
   return (
@@ -80,18 +87,18 @@ const AboutPage = props => {
           <AddSkillForm
             closeAddSkillForm={closeAddSkillForm}
             renderResponse={showResponseMessage}
+            addSkillToState={addSkillToState}
           />
         ) : null}
-        <AboutForm
-          skills={skills}
-          deleteSkill={deleteSkill}
-          showAddSkillForm={showAddSkillForm}
-        />
-        {
-          //   <PositionedStyledButton onClick={showAddSkillForm}>
-          //   Добавить новую запись
-          // </PositionedStyledButton>
-        }
+        {error ? (
+          <div>Произошла ошибка загрузки: {error}</div>
+        ) : (
+          <AboutForm
+            skills={stacks}
+            deleteSkill={deleteSkill}
+            showAddSkillForm={showAddSkillForm}
+          />
+        )}
       </StyledMaincontent>
     </Fragment>
   );

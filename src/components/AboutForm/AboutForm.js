@@ -58,7 +58,7 @@ const AboutForm = ({ skills, deleteSkill, showAddSkillForm }) => {
             <StyledFieldsContainer>
               {skills.map(skill => (
                 <SkillBlock
-                  key={skill.type}
+                  key={skill._id}
                   type={skill.type}
                   skills={skill.skills}
                   deleteSkill={deleteSkill}

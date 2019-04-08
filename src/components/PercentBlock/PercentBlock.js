@@ -22,7 +22,7 @@ const StyledPercentText = styled.div`
   color: ${colors.green};
 `;
 
-const PercentBlock = ({ skill, percent }) => {
+const PercentBlock = ({ id, percent }) => {
   const numberNormalizer = value => {
     if (!value || !value.trim) return '';
     const onlyNums = value.replace(/[^\d]/g, '');
@@ -40,7 +40,7 @@ const PercentBlock = ({ skill, percent }) => {
   return (
     <StyledPercentBlock>
       <Field
-        name={`${skill}_percent`}
+        name={`${id}_percent`}
         initialValue={percent}
         parse={numberNormalizer}
         format={numberFormatter}

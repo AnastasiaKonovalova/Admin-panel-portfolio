@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { StyledSubtitle } from '../../styledComponents/styledComponents';
@@ -17,16 +17,27 @@ const StyledSkillsList = styled.ul`
   align-items: flex-start;
 `;
 
-const SkillBlock = ({ type, skills }) => {
+const SkillBlock = ({ type, skills, deleteSkill }) => {
+  const handleClicks = (type, id) => e => {
+    e.preventDefault();
+    const classList = e.target.classList;
+    if (classList.contains('delete_skill')) {
+      deleteSkill(type, id);
+    }
+    if (classList.contains('edit_skill')) {
+      console.log('edit_skill');
+    }
+  };
+
   return (
     <StyledSkillsBlock>
       <StyledSubtitle>{type}</StyledSubtitle>
       <StyledSkillsList>
         {skills.map(skill => (
           <SkillItem
-            key={skill.skill}
-            skill={skill.skill}
-            percent={skill.percent}
+            key={skill._id}
+            skill={skill}
+            handleClicks={handleClicks(type, skill._id)}
           />
         ))}
       </StyledSkillsList>

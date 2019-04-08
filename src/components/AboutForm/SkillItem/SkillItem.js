@@ -37,16 +37,17 @@ const StyledTextInput = styled.input`
   `}
 `;
 
-const SkillItem = ({ skill, percent, deleteSkill }) => {
+const SkillItem = ({ skill, handleClicks }) => {
   const [isSkillDisabled, setSkillDisabled] = useState(true);
+
   const handleEditButtonClick = e => {
-    e.preventDefault();
+    handleClicks(e);
     setSkillDisabled(false);
   };
 
   return (
     <StyledSkillItem>
-      <Field name={skill} initialValue={skill}>
+      <Field name={skill._id} initialValue={skill.skill}>
         {({ input }) => (
           <StyledTextInput
             {...input}
@@ -56,9 +57,12 @@ const SkillItem = ({ skill, percent, deleteSkill }) => {
           />
         )}
       </Field>
-      <StyledEditButton onClick={handleEditButtonClick} />
-      <StyledCloseButton onClick={deleteSkill} />
-      <PercentBlock skill={skill} percent={percent} />
+      <StyledEditButton
+        onClick={handleEditButtonClick}
+        className="edit_skill"
+      />
+      <StyledCloseButton className="delete_skill" onClick={handleClicks} />
+      <PercentBlock id={skill._id} percent={skill.percent} />
     </StyledSkillItem>
   );
 };
