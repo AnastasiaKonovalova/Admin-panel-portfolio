@@ -44,6 +44,7 @@ const StyledFieldsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5px;
 
   ${media.tablet`
     flex-direction: column;
@@ -76,13 +77,15 @@ const AddSkillForm = ({
   renderResponse,
   addSkillToState,
 }) => {
+  const initialValues = { type: '', skill: '', percent: '0' };
+
   const myHandleSubmit = values => {
     apiRequest
       .post(
         '/skills',
         {
           type: values.type,
-          percent: +values.undefined_percent,
+          percent: +values.percent,
           skill: values.skill,
         },
         { mode: 'cors' }
@@ -101,7 +104,14 @@ const AddSkillForm = ({
         closeAddSkillForm();
       });
   };
+  const syncValidate = values => {
+    const errors = {};
 
+    Object.keys(initialValues).forEach(key =>
+      values[key] ? null : (errors[key] = 'Обязательное поле')
+    );
+    return errors;
+  };
   const handleReset = form => e => {
     form.reset();
     closeAddSkillForm();
@@ -111,7 +121,9 @@ const AddSkillForm = ({
     <StyledFormWrapper>
       <Form
         onSubmit={myHandleSubmit}
-        render={({ handleSubmit, form, submitting, pristine }) => (
+        validate={syncValidate}
+        initialValues={initialValues}
+        render={({ handleSubmit, form, submitting, pristine, invalid }) => (
           <StyledForm
             onSubmit={e => {
               e.preventDefault();
@@ -147,14 +159,17 @@ const AddSkillForm = ({
               </Field>
 
               <StyledFieldset>
-                <PercentBlock skill={''} percent={'0'} />
+                <PercentBlock />
               </StyledFieldset>
             </StyledFieldsContainer>
             <StyledButtonContainer>
               <StyledButton type="reset" onClick={handleReset(form)}>
                 Отмена
               </StyledButton>
-              <StyledButton type="submit" disabled={submitting || pristine}>
+              <StyledButton
+                type="submit"
+                disabled={submitting || pristine || invalid}
+              >
                 Добавить
               </StyledButton>
             </StyledButtonContainer>

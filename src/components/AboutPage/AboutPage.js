@@ -27,6 +27,10 @@ const AboutPage = props => {
       });
   }, []);
 
+  const updateStack = skills => {
+    setStack(skills);
+  };
+
   const addSkillToState = newStack => {
     const oldStack = stacks.find(stack => stack.type === newStack.type);
     if (!oldStack) {
@@ -54,6 +58,12 @@ const AboutPage = props => {
     const editedStack = stacks.find(skill => skill.type === type);
     const newSkills = editedStack.skills.filter(skill => skill._id !== id);
     if (newSkills.length > 0) {
+      // const newStack = Object.assign({}, editedStack);
+      // newStack.skills = newSkills;
+      // setStack([
+      //   ...stacks.filter(stack => stack._id !== editedStack._id),
+      //   newStack,
+      // ]);
       editedStack.skills = newSkills;
       setStack([...stacks]);
     } else {
@@ -97,6 +107,8 @@ const AboutPage = props => {
             skills={stacks}
             deleteSkill={deleteSkill}
             showAddSkillForm={showAddSkillForm}
+            renderResponse={showResponseMessage}
+            updateStack={updateStack}
           />
         )}
       </StyledMaincontent>

@@ -37,6 +37,7 @@ const SkillBlock = ({ type, skills, deleteSkill }) => {
           <SkillItem
             key={skill._id}
             skill={skill}
+            type={type}
             handleClicks={handleClicks(type, skill._id)}
           />
         ))}

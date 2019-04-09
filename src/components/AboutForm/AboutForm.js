@@ -5,6 +5,7 @@ import { Form } from 'react-final-form';
 import { StyledButton } from '../styledComponents/styledComponents';
 import { StyledForm } from '../styledComponents/styledLayouts';
 import { media } from '../styledComponents/media';
+import { apiRequest } from '../../utilities/axiosConfig';
 
 import SkillBlock from './SkillBlock';
 
@@ -39,9 +40,33 @@ const PositionedStyledButton = styled(StyledButton)`
   margin-right: 30px;
 `;
 
-const AboutForm = ({ skills, deleteSkill, showAddSkillForm }) => {
+const AboutForm = ({
+  skills,
+  deleteSkill,
+  showAddSkillForm,
+  renderResponse,
+  updateStack,
+}) => {
   const myHandleSubmit = values => {
     console.log('myHandleSubmit', values);
+    const request = {};
+    Object.keys(values).forEach(key => {
+      request[key] = values[key];
+    });
+
+    console.log('myHandleSubmit request', request);
+    apiRequest
+      .put('/skills', request)
+      .then(response => {
+        console.log('editSkills response', response);
+        const { message, items } = response.data;
+        renderResponse(message);
+        updateStack(items);
+      })
+      .catch(error => {
+        console.log('AboutForm submit error', error);
+        renderResponse(`Произошла ошибка: ${error.message}`);
+      });
   };
 
   return (
