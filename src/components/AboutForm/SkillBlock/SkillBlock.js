@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { FieldArray } from 'react-final-form-arrays';
 
 import { StyledSubtitle } from '../../styledComponents/styledComponents';
 import SkillItem from '../SkillItem';
@@ -17,28 +18,17 @@ const StyledSkillsList = styled.ul`
   align-items: flex-start;
 `;
 
-const SkillBlock = ({ type, skills, deleteSkill }) => {
-  const handleClicks = (type, id) => e => {
-    e.preventDefault();
-    const classList = e.target.classList;
-    if (classList.contains('delete_skill')) {
-      deleteSkill(type, id);
-    }
-    if (classList.contains('edit_skill')) {
-      console.log('edit_skill');
-    }
-  };
-
+const SkillBlock = ({ type, skills, mutators }) => {
   return (
     <StyledSkillsBlock>
       <StyledSubtitle>{type}</StyledSubtitle>
       <StyledSkillsList>
         {skills.map(skill => (
           <SkillItem
+            mutators={mutators}
             key={skill._id}
             skill={skill}
             type={type}
-            handleClicks={handleClicks(type, skill._id)}
           />
         ))}
       </StyledSkillsList>

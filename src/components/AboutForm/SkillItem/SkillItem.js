@@ -16,6 +16,16 @@ const StyledSkillItem = styled.li`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
+  position: relative;
+`;
+
+const DeletedSkillItem = styled.div`
+  height: 2px;
+  width: 100%;
+  background-color: ${colors.grayGreen};
+  position: absolute;
+  left: 0;
+  top: 50%;
 `;
 
 const StyledTextInput = styled.input`
@@ -37,17 +47,24 @@ const StyledTextInput = styled.input`
   `}
 `;
 
-const SkillItem = ({ skill, handleClicks, type }) => {
+const SkillItem = ({ skill, type, mutators }) => {
   const [isSkillDisabled, setSkillDisabled] = useState(true);
+  const [isSkillDeleted, setSkillDeleted] = useState(false);
 
-  const handleEditButtonClick = e => {
-    handleClicks(e);
-    setSkillDisabled(false);
+  const handleDelete = (type, id) => e => {
+    e.preventDefault();
+    mutators.deleteSkillMutator(type, id);
+    setSkillDeleted(true);
   };
 
+  const handleEdit = e => {
+    e.preventDefault();
+    setSkillDisabled(false);
+  };
   return (
     <StyledSkillItem>
-      <Field name={`${type}.${skill._id}`} initialValue={skill.skill}>
+      {isSkillDeleted ? <DeletedSkillItem /> : null}
+      <Field name={`${type}.${skill._id}`}>
         {({ input }) => (
           <StyledTextInput
             {...input}
@@ -57,11 +74,11 @@ const SkillItem = ({ skill, handleClicks, type }) => {
           />
         )}
       </Field>
-      <StyledEditButton
-        onClick={handleEditButtonClick}
-        className="edit_skill"
+      <StyledEditButton onClick={handleEdit} className="edit_skill" />
+      <StyledCloseButton
+        className="delete_skill"
+        onClick={handleDelete(type, skill._id)}
       />
-      <StyledCloseButton className="delete_skill" onClick={handleClicks} />
       <PercentBlock id={skill._id} percent={skill.percent} type={type} />
     </StyledSkillItem>
   );

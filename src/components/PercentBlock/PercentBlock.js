@@ -24,11 +24,14 @@ const StyledPercentText = styled.div`
 
 const PercentBlock = ({ id, percent, type }) => {
   const numberNormalizer = value => {
+    console.log('numberNormalizer');
+    if (+value > 100) return '100';
     if (!value || !value.trim) return '';
     const onlyNums = value.replace(/[^\d]/g, '');
     return onlyNums;
   };
   const numberFormatter = value => {
+    console.log('numberFormatter');
     if (!value) return 0;
     if (value % 5 > 0) {
       return Math.round(value / 5) * 5;

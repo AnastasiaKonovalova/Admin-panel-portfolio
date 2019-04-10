@@ -84,14 +84,13 @@ const AddSkillForm = ({
       .post(
         '/skills',
         {
-          type: values.type,
-          percent: +values.percent,
-          skill: values.skill,
+          type: values.type.toLowerCase().trim(),
+          percent: +values.percent.trim(),
+          skill: values.skill.trim(),
         },
         { mode: 'cors' }
       )
       .then(response => {
-        console.log('AddSkillForm submit response', response);
         const { message, skill } = response.data;
         addSkillToState(skill);
         renderResponse(message);

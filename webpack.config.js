@@ -19,9 +19,6 @@ const common = {
     path: PATHS.build,
     filename: 'index_bundle.js',
   },
-  devServer: {
-    historyApiFallback: true,
-  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',

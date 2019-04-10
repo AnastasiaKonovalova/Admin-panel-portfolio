@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Form } from 'react-final-form';
+import arrayMutators, { push } from 'final-form-arrays';
 
 import { StyledButton } from '../styledComponents/styledComponents';
 import { StyledForm } from '../styledComponents/styledLayouts';
@@ -42,23 +43,29 @@ const PositionedStyledButton = styled(StyledButton)`
 
 const AboutForm = ({
   skills,
-  deleteSkill,
   showAddSkillForm,
   renderResponse,
   updateStack,
 }) => {
   const myHandleSubmit = values => {
-    console.log('myHandleSubmit', values);
     const request = {};
     Object.keys(values).forEach(key => {
-      request[key] = values[key];
+      const stack = values[key];
+
+      Object.keys(stack).forEach(input => {
+        if (!stack[input]) {
+          delete stack[input];
+        }
+      });
+
+      if (Object.keys(stack).length > 0) {
+        request[key] = stack;
+      }
     });
 
-    console.log('myHandleSubmit request', request);
     apiRequest
       .put('/skills', request)
       .then(response => {
-        console.log('editSkills response', response);
         const { message, items } = response.data;
         renderResponse(message);
         updateStack(items);
@@ -69,42 +76,69 @@ const AboutForm = ({
       });
   };
 
+  const deleteSkillMutator = ([type, id], state, utils) => {
+    const name = `${type}.${id}`;
+    const percentName = `${type}.${id}_percent`;
+    utils.changeValue(state, name, value => '');
+    utils.changeValue(state, percentName, value => '');
+  };
+
+  const getInitialValues = () => {
+    const initialValues = {};
+    skills.forEach(stack => {
+      initialValues[stack.type] = {};
+
+      stack.skills.forEach(skill => {
+        const percent = `${skill._id}_percent`;
+        initialValues[stack.type][skill._id] = skill.skill;
+        initialValues[stack.type][percent] = skill.percent;
+      });
+    });
+    return initialValues;
+  };
+
   return (
     <Form
       onSubmit={myHandleSubmit}
-      render={({ handleSubmit, form, submitting, pristine }) => (
-        <Fragment>
-          <StyledForm
-            onSubmit={e => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
-            <StyledFieldsContainer>
-              {skills.map(skill => (
-                <SkillBlock
-                  key={skill._id}
-                  type={skill.type}
-                  skills={skill.skills}
-                  deleteSkill={deleteSkill}
-                />
-              ))}
-            </StyledFieldsContainer>
+      mutators={{ deleteSkillMutator }}
+      initialValues={getInitialValues()}
+      render={({ handleSubmit, form, submitting, pristine }) => {
+        return (
+          <Fragment>
+            <StyledForm
+              onSubmit={e => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <StyledFieldsContainer>
+                {skills.map(skill => {
+                  return (
+                    <SkillBlock
+                      mutators={form.mutators}
+                      key={skill._id}
+                      type={skill.type}
+                      skills={skill.skills}
+                    />
+                  );
+                })}
+              </StyledFieldsContainer>
 
-            <StyledButtonContainer>
-              <PositionedStyledButton
-                type="submit"
-                disabled={submitting || pristine}
-              >
-                Сохранить
-              </PositionedStyledButton>
-              <PositionedStyledButton onClick={showAddSkillForm}>
-                Добавить новую запись
-              </PositionedStyledButton>
-            </StyledButtonContainer>
-          </StyledForm>
-        </Fragment>
-      )}
+              <StyledButtonContainer>
+                <PositionedStyledButton
+                  type="submit"
+                  disabled={submitting || pristine}
+                >
+                  Сохранить
+                </PositionedStyledButton>
+                <PositionedStyledButton onClick={showAddSkillForm}>
+                  Добавить новую запись
+                </PositionedStyledButton>
+              </StyledButtonContainer>
+            </StyledForm>
+          </Fragment>
+        );
+      }}
     />
   );
 };

@@ -5,6 +5,7 @@ module.exports = function() {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
+      historyApiFallback: true,
       publicPath: 'http://localhost:8080/admin/',
       openPage: 'admin/',
     },

@@ -15,6 +15,7 @@ const AboutPage = props => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log('USE EFFECT');
     apiRequest
       .get('/skills', { mode: 'cors' })
       .then(response => {
@@ -28,16 +29,13 @@ const AboutPage = props => {
   }, []);
 
   const updateStack = skills => {
-    setStack(skills);
+    console.log('UPDATE STATE', skills);
+    setStack(prevstate => skills);
   };
 
   const addSkillToState = newStack => {
-    const oldStack = stacks.find(stack => stack.type === newStack.type);
-    if (!oldStack) {
-      setStack([...stacks, newStack]);
-    } else {
-      oldStack.skills = newStack.skills;
-    }
+    const newState = stacks.filter(stack => stack.type !== newStack.type);
+    setStack([...newState, newStack]);
   };
   const showAddSkillForm = e => {
     e.preventDefault();
@@ -52,35 +50,6 @@ const AboutPage = props => {
   };
   const closeResponseMessage = () => {
     setResponseMessage('');
-  };
-
-  const removeSkillFromState = (type, id) => {
-    const editedStack = stacks.find(skill => skill.type === type);
-    const newSkills = editedStack.skills.filter(skill => skill._id !== id);
-    if (newSkills.length > 0) {
-      // const newStack = Object.assign({}, editedStack);
-      // newStack.skills = newSkills;
-      // setStack([
-      //   ...stacks.filter(stack => stack._id !== editedStack._id),
-      //   newStack,
-      // ]);
-      editedStack.skills = newSkills;
-      setStack([...stacks]);
-    } else {
-      setStack(stacks.filter(stack => stack._id !== editedStack._id));
-    }
-  };
-  const deleteSkill = (type, id) => {
-    apiRequest
-      .put(`/skills/${id}`, { type: type }, { mode: 'cors' })
-      .then(response => {
-        console.log('deleteSkill response', response);
-        removeSkillFromState(type, id);
-      })
-      .catch(error => {
-        console.log('deleteSkill put error', error);
-        showResponseMessage(`Произошла ошибка: ${error.message}`);
-      });
   };
 
   return (
@@ -105,7 +74,6 @@ const AboutPage = props => {
         ) : (
           <AboutForm
             skills={stacks}
-            deleteSkill={deleteSkill}
             showAddSkillForm={showAddSkillForm}
             renderResponse={showResponseMessage}
             updateStack={updateStack}
