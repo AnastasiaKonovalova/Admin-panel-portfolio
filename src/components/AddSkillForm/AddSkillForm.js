@@ -12,6 +12,7 @@ import PercentBlock from '../PercentBlock';
 import { media } from '../styledComponents/media';
 import { colors } from '../../utilities/colors';
 import { apiRequest } from '../../utilities/axiosConfig';
+import { numberFormatterFive } from '../../utilities/helpers';
 
 const StyledSubtitle = styled.h3`
   color: ${colors.grayGreen};
@@ -80,12 +81,14 @@ const AddSkillForm = ({
   const initialValues = { type: '', skill: '', percent: '0' };
 
   const myHandleSubmit = values => {
+    // console.log('AddSkillForm values', values);
+    // console.log('formatted percent', numberFormatterFive(values.percent));
     apiRequest
       .post(
         '/skills',
         {
           type: values.type.toLowerCase().trim(),
-          percent: +values.percent.trim(),
+          percent: numberFormatterFive(values.percent),
           skill: values.skill.trim(),
         },
         { mode: 'cors' }
@@ -106,9 +109,13 @@ const AddSkillForm = ({
   const syncValidate = values => {
     const errors = {};
 
-    Object.keys(initialValues).forEach(key =>
-      values[key] ? null : (errors[key] = 'Обязательное поле')
-    );
+    Object.keys(initialValues).forEach(key => {
+      const value = values[key];
+      if (typeof value === typeof '') {
+        value.trim() ? null : (errors[key] = 'Обязательное поле');
+      }
+      value ? null : (errors[key] = 'Обязательное поле');
+    });
     return errors;
   };
   const handleReset = form => e => {

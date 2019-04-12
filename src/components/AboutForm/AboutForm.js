@@ -49,18 +49,17 @@ const AboutForm = ({
 }) => {
   const myHandleSubmit = values => {
     const request = {};
+
     Object.keys(values).forEach(key => {
       const stack = values[key];
-
-      Object.keys(stack).forEach(input => {
+      const skills = Object.keys(stack).reduce((acc, input, inputIndex) => {
         if (!stack[input]) {
-          delete stack[input];
+          return { ...acc };
         }
-      });
+        return { ...acc, [input]: stack[input] };
+      }, {});
 
-      if (Object.keys(stack).length > 0) {
-        request[key] = stack;
-      }
+      request[key] = skills;
     });
 
     apiRequest

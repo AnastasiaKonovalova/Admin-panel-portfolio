@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Field } from 'react-final-form';
 
 import { colors } from '../../utilities/colors';
+import { numberFormatterFive } from '../../utilities/helpers';
 
 const StyledPercentBlock = styled.div`
   display: flex;
@@ -24,19 +25,15 @@ const StyledPercentText = styled.div`
 
 const PercentBlock = ({ id, percent, type }) => {
   const numberNormalizer = value => {
-    console.log('numberNormalizer');
+    // console.log('numberNormalizer');
     if (+value > 100) return '100';
     if (!value || !value.trim) return '';
     const onlyNums = value.replace(/[^\d]/g, '');
     return onlyNums;
   };
-  const numberFormatter = value => {
-    console.log('numberFormatter');
-    if (!value) return 0;
-    if (value % 5 > 0) {
-      return Math.round(value / 5) * 5;
-    } else {
-      return value;
+  const handleEnterFormatter = e => {
+    if (e.key === 'Enter') {
+      e.target.value = numberFormatterFive(e.target.value);
     }
   };
 
@@ -46,10 +43,16 @@ const PercentBlock = ({ id, percent, type }) => {
         name={id ? `${type}.${id}_percent` : 'percent'}
         initialValue={percent}
         parse={numberNormalizer}
-        format={numberFormatter}
+        format={numberFormatterFive}
         formatOnBlur
       >
-        {({ input }) => <StyledPercentInput {...input} type="text" />}
+        {({ input }) => (
+          <StyledPercentInput
+            {...input}
+            type="text"
+            onKeyDown={handleEnterFormatter}
+          />
+        )}
       </Field>
 
       <StyledPercentText>%</StyledPercentText>
