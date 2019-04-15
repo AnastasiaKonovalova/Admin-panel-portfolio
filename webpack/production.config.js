@@ -2,7 +2,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = function() {
+module.exports = function () {
   return {
     mode: 'production',
     optimization: {
@@ -11,14 +11,14 @@ module.exports = function() {
         new TerserPlugin({
           cache: true,
           parallel: true,
-          sourceMap: true,
-        }),
-      ],
+          sourceMap: true
+        })
+      ]
     },
     plugins: [
       new MiniCSSExtractPlugin({
-        filename: './css/[name].css',
-      }),
+        filename: './css/[name].css'
+      })
     ],
     module: {
       rules: [
@@ -28,11 +28,11 @@ module.exports = function() {
             {
               loader: MiniCSSExtractPlugin.loader,
               options: {
-                publicPath: '../',
-              },
+                publicPath: '../'
+              }
             },
-            'css-loader',
-          ],
+            'css-loader'
+          ]
         },
         {
           test: /\.(jpe?g|png|gif|svg|eot|ttf|woff|woff2)$/i,
@@ -42,23 +42,23 @@ module.exports = function() {
               options: {
                 mozjpeg: {
                   progressive: true,
-                  quality: 65,
+                  quality: 65
                 },
                 optipng: {
-                  enabled: true,
+                  enabled: true
                 },
                 pngquant: {
                   quality: '65-90',
-                  speed: 4,
+                  speed: 4
                 },
                 gifsicle: {
-                  interlaced: false,
-                },
-              },
-            },
-          ],
-        },
-      ],
-    },
+                  interlaced: false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
   };
 };

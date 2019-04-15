@@ -21,6 +21,7 @@
     "indent": ["error", 2],
     "object-curly-spacing": ["error", "always"],
     "react/jsx-uses-react": ["error"],
-    "react/jsx-uses-vars": ["error"]
+    "react/jsx-uses-vars": ["error"],
+    "quotes": ["error", "single"]
   }
 }

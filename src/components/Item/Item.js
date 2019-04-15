@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import {
   StyledEditButton,
-  StyledCloseButton,
+  StyledCloseButton
 } from '../styledComponents/styledComponents';
 import { colors } from '../../utilities/colors';
 

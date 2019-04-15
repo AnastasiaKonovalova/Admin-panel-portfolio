@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Form } from 'react-final-form';
-import arrayMutators, { push } from 'final-form-arrays';
 
 import { StyledButton } from '../styledComponents/styledComponents';
 import { StyledForm } from '../styledComponents/styledLayouts';
@@ -45,7 +44,7 @@ const AboutForm = ({
   skills,
   showAddSkillForm,
   renderResponse,
-  updateStack,
+  updateStack
 }) => {
   const myHandleSubmit = values => {
     const request = {};

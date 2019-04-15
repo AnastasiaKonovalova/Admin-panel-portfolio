@@ -6,7 +6,7 @@ const sizes = {
   phone: 480,
   phoneLandscape: 568,
   miniphone: 320,
-  smallHeight: 649,
+  smallHeight: 649
 };
 
 export const media = Object.keys(sizes).reduce((accum, screen) => {

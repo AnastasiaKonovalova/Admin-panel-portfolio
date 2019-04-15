@@ -9,7 +9,7 @@ import {
   StyledButton,
   StyledInput,
   StyledErrorSpan,
-  StyledSubtitle,
+  StyledSubtitle
 } from '../styledComponents/styledComponents';
 
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
@@ -121,7 +121,7 @@ const WorksForm = props => {
         invalid,
         submitting,
         pristine,
-        values,
+        values
       }) => (
         <Fragment>
           <StyledSubtitle>Добавить работу</StyledSubtitle>

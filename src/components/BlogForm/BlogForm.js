@@ -7,7 +7,7 @@ import {
   StyledInput,
   StyledTextarea,
   StyledErrorSpan,
-  StyledSubtitle,
+  StyledSubtitle
 } from '../styledComponents/styledComponents';
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
 import { apiRequest } from '../../utilities/axiosConfig';
@@ -33,7 +33,7 @@ const BlogForm = props => {
         {
           title: values.title,
           date: values.date,
-          text: values.text,
+          text: values.text
         },
         { mode: 'cors' }
       )

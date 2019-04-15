@@ -6,7 +6,7 @@ import { colors } from '../../../utilities/colors';
 import { media } from '../../styledComponents/media';
 import {
   StyledEditButton,
-  StyledCloseButton,
+  StyledCloseButton
 } from '../../styledComponents/styledComponents';
 
 import PercentBlock from '../../PercentBlock';

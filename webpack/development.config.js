@@ -1,30 +1,19 @@
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
-
-module.exports = function() {
+module.exports = function () {
   return {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
       historyApiFallback: true,
       publicPath: 'http://localhost:8080/admin/',
-      openPage: 'admin/',
+      openPage: 'admin/'
     },
     module: {
       rules: [
         {
           test: /\.css$/,
-          use: [
-            // {
-            //   loader: MiniCSSExtractPlugin.loader,
-            //   options: {
-            //     publicPath: '../',
-            //   },
-            // },
-            'style-loader',
-            'css-loader',
-          ],
-        },
-      ],
-    },
+          use: ['style-loader', 'css-loader']
+        }
+      ]
+    }
   };
 };

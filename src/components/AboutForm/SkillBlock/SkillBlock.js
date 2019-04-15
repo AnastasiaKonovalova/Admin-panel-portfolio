@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { FieldArray } from 'react-final-form-arrays';
 
 import { StyledSubtitle } from '../../styledComponents/styledComponents';
 import SkillItem from '../SkillItem';
