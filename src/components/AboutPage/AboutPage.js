@@ -17,7 +17,7 @@ const AboutPage = props => {
   useEffect(() => {
     console.log('USE EFFECT');
     apiRequest
-      .get('/skills', { mode: 'cors' })
+      .get('/skills')
       .then(response => {
         const { skills } = response.data;
         setStack(skills);

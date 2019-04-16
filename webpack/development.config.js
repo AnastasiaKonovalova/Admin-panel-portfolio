@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = function() {
   return {
     mode: 'development',
     devtool: 'source-map',

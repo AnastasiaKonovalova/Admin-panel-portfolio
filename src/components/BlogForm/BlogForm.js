@@ -7,7 +7,7 @@ import {
   StyledInput,
   StyledTextarea,
   StyledErrorSpan,
-  StyledSubtitle
+  StyledSubtitle,
 } from '../styledComponents/styledComponents';
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
 import { apiRequest } from '../../utilities/axiosConfig';
@@ -28,15 +28,11 @@ const BlogForm = props => {
 
   const myHandleSubmit = values => {
     apiRequest
-      .post(
-        '/blog',
-        {
-          title: values.title,
-          date: values.date,
-          text: values.text
-        },
-        { mode: 'cors' }
-      )
+      .post('/blog', {
+        title: values.title,
+        date: values.date,
+        text: values.text,
+      })
       .then(response => {
         console.log('BlogForm submit response', response);
         const { message, article } = response.data;

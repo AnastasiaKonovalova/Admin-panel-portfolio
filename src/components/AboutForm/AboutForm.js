@@ -12,15 +12,9 @@ import SkillBlock from './SkillBlock';
 const StyledFieldsContainer = styled.div`
   padding-left: 30px;
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
-  height: 400px;
   width: 100%;
-
-  ${media.tablet`
-    height: 600px;
-  `}
 
   ${media.phone`
     padding: 0 10px;
@@ -33,18 +27,21 @@ const StyledButtonContainer = styled.div`
   align-items: center;
 
   ${media.phone`
+    flex-direction: column;
+    align-items: flex-start;
     margin-left: 10px;
   `}
 `;
 const PositionedStyledButton = styled(StyledButton)`
   margin-right: 30px;
+  margin-bottom: 15px;
 `;
 
 const AboutForm = ({
   skills,
   showAddSkillForm,
   renderResponse,
-  updateStack
+  updateStack,
 }) => {
   const myHandleSubmit = values => {
     const request = {};
@@ -77,8 +74,8 @@ const AboutForm = ({
   const deleteSkillMutator = ([type, id], state, utils) => {
     const name = `${type}.${id}`;
     const percentName = `${type}.${id}_percent`;
-    utils.changeValue(state, name, value => '');
-    utils.changeValue(state, percentName, value => '');
+    utils.changeValue(state, name, () => '');
+    utils.changeValue(state, percentName, () => '');
   };
 
   const getInitialValues = () => {

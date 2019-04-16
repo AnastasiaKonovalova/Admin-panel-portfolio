@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {
-  StyledEditButton,
-  StyledCloseButton
-} from '../styledComponents/styledComponents';
+import { StyledCloseButton } from '../styledComponents/styledComponents';
 import { colors } from '../../utilities/colors';
 
 const StyledItem = styled.li`
@@ -25,7 +22,6 @@ const Item = props => {
 
   return (
     <StyledItem>
-      <StyledEditButton />
       <StyledCloseButton onClick={deleteItem(_id)} />
       <StyledText>{title}</StyledText>
     </StyledItem>

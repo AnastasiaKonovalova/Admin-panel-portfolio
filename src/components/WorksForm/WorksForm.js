@@ -9,7 +9,7 @@ import {
   StyledButton,
   StyledInput,
   StyledErrorSpan,
-  StyledSubtitle
+  StyledSubtitle,
 } from '../styledComponents/styledComponents';
 
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
@@ -105,9 +105,11 @@ const WorksForm = props => {
     onChange(e);
     setImageFile(e.target.files[0]);
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = e => setImagePreview(reader.result);
-    reader.readAsDataURL(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => setImagePreview(reader.result);
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -115,14 +117,7 @@ const WorksForm = props => {
       onSubmit={myHandleSubmit}
       validate={syncValidate}
       initialValues={initialValues}
-      render={({
-        handleSubmit,
-        form,
-        invalid,
-        submitting,
-        pristine,
-        values
-      }) => (
+      render={({ handleSubmit, form, invalid, submitting, pristine }) => (
         <Fragment>
           <StyledSubtitle>Добавить работу</StyledSubtitle>
           <StyledForm
@@ -189,7 +184,7 @@ const WorksForm = props => {
                         type="file"
                       />
                     </StyledLabelBlock>
-                    {meta.error && meta.invalid && (
+                    {meta.error && meta.touched && (
                       <StyledErrorSpan>{meta.error}</StyledErrorSpan>
                     )}
                   </StyledFieldset>

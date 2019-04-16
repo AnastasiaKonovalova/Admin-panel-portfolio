@@ -4,7 +4,7 @@ import { apiRequest } from '../../utilities/axiosConfig';
 
 import {
   StyledMaincontent,
-  StyledColumn
+  StyledColumn,
 } from '../styledComponents/styledLayouts';
 import { StyledTitle } from '../styledComponents/styledComponents';
 
@@ -19,7 +19,7 @@ const WorksPage = props => {
 
   useEffect(() => {
     apiRequest
-      .get('/works', { mode: 'cors' })
+      .get('/works')
       .then(response => {
         const { works } = response.data;
         console.log('WorksPage useEffect response.data', response.data);
@@ -41,7 +41,7 @@ const WorksPage = props => {
     setWorks([...works, work]);
   };
   const deleteWork = id => () => {
-    apiRequest.delete(`/works/${id}`, { mode: 'cors' }).then(response => {
+    apiRequest.delete(`/works/${id}`).then(response => {
       console.log('deleteWork response', response);
       if (response.status !== 201) {
         showResponseMessage(response.data.message);

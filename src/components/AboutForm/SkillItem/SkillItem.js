@@ -6,7 +6,7 @@ import { colors } from '../../../utilities/colors';
 import { media } from '../../styledComponents/media';
 import {
   StyledEditButton,
-  StyledCloseButton
+  StyledCloseButton,
 } from '../../styledComponents/styledComponents';
 
 import PercentBlock from '../../PercentBlock';
@@ -39,7 +39,7 @@ const StyledTextInput = styled.input`
   text-transform: capitalize;
 
   &:read-only {
-    background: ${colors.white07};
+    background: ${colors.transparentWhite};
   }
 
   ${media.phone`

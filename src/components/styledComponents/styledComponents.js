@@ -62,7 +62,7 @@ export const StyledTextarea = styled.textarea`
 
   ${media.tablet`
   margin-right: 0;
-    width: 500px;
+    max-width: 450px;
     height: 300px;
   `}
 

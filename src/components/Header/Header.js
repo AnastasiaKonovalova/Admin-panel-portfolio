@@ -22,6 +22,7 @@ const StyledHeader = styled.h1`
   font-size: 28px;
   font-weight: 500;
   color: ${colors.white};
+  margin-right: 10px;
 
   ${media.tablet`
     font-size: 21px;
@@ -30,14 +31,16 @@ const StyledHeader = styled.h1`
   ${media.phone`
     text-align: center;
     margin-top: 10px;
+    margin-right:0;
   `}
 `;
 
 const StyledLink = styled.a`
   font-weight: 300;
-  color: ${colors.white07};
+  color: ${colors.transparentWhite};
   border-bottom: 1px solid transparent;
   transition: 0.3s;
+  text-align: right;
 
   &:hover {
     color: ${colors.white};
@@ -45,7 +48,7 @@ const StyledLink = styled.a`
   }
 
   ${media.tablet`
-    border-bottom: 1px solid ${colors.white07};
+    border-bottom: 1px solid ${colors.transparentWhite};
   `}
 `;
 

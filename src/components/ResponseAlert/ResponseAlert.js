@@ -24,7 +24,7 @@ const StyledContainer = styled.div`
   padding: 20px;
   background-color: ${colors.white};
   border-radius: 3px;
-  box-shadow: 0 0 10px 5px ${colors.black05};
+  box-shadow: 0 0 10px 5px ${colors.transparentBlack};
 `;
 const StyledText = styled.div`
   color: ${colors.grayGreen};

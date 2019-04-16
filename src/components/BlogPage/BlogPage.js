@@ -4,7 +4,7 @@ import { apiRequest } from '../../utilities/axiosConfig';
 
 import {
   StyledMaincontent,
-  StyledColumn
+  StyledColumn,
 } from '../styledComponents/styledLayouts';
 import { StyledTitle } from '../styledComponents/styledComponents';
 
@@ -19,7 +19,7 @@ const BlogPage = props => {
 
   useEffect(() => {
     apiRequest
-      .get('/blog', { mode: 'cors' })
+      .get('/blog')
       .then(response => {
         const { articles } = response.data;
         // console.log('BlogPage useEffect response.data', response.data);
@@ -41,7 +41,7 @@ const BlogPage = props => {
     setArticles([...articles, article]);
   };
   const deleteArticle = id => () => {
-    apiRequest.delete(`/blog/${id}`, { mode: 'cors' }).then(response => {
+    apiRequest.delete(`/blog/${id}`).then(response => {
       console.log('deleteArticle response', response);
       if (response.status !== 201) {
         showResponseMessage(response.data.message);

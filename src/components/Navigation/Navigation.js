@@ -8,7 +8,7 @@ import { media } from '../styledComponents/media';
 const StyledLink = styled(NavLink)`
   text-transform: uppercase;
   padding: 20px 25px;
-  min-width: 180px;
+  min-width: 150px;
   background-color: ${colors.ligthGray};
   color: ${colors.green};
   text-align: center;
@@ -28,7 +28,7 @@ const StyledLink = styled(NavLink)`
 
 const activeStyle = {
   backgroundColor: `${colors.white}`,
-  color: `${colors.lightGreen}`
+  color: `${colors.lightGreen}`,
 };
 
 const StyledNavigationPanel = styled.div`

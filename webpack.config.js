@@ -53,7 +53,7 @@ const common = {
   }
 };
 
-module.exports = function (env) {
+module.exports = function(env) {
   if (env === 'production') {
     return merge([common, prod()]);
   }

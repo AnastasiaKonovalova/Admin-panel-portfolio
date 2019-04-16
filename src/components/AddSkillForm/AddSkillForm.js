@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 
 import {
   StyledButton,
-  StyledErrorSpan
+  StyledErrorSpan,
 } from '../styledComponents/styledComponents';
 import { StyledFieldset } from '../styledComponents/styledLayouts';
 import PercentBlock from '../PercentBlock';
@@ -33,7 +34,7 @@ const StyledFormWrapper = styled.div`
 `;
 const StyledForm = styled.form`
   background-color: ${colors.ligthGray};
-  box-shadow: 0 0 10px 5px ${colors.black05};
+  box-shadow: 0 0 10px 5px ${colors.transparentBlack};
   padding: 20px;
   border-radius: 3px;
   display: flex;
@@ -76,23 +77,17 @@ const StyledInput = styled.input`
 const AddSkillForm = ({
   closeAddSkillForm,
   renderResponse,
-  addSkillToState
+  addSkillToState,
 }) => {
   const initialValues = { type: '', skill: '', percent: '0' };
 
   const myHandleSubmit = values => {
-    // console.log('AddSkillForm values', values);
-    // console.log('formatted percent', numberFormatterFive(values.percent));
     apiRequest
-      .post(
-        '/skills',
-        {
-          type: values.type.toLowerCase().trim(),
-          percent: numberFormatterFive(values.percent),
-          skill: values.skill.trim()
-        },
-        { mode: 'cors' }
-      )
+      .post('/skills', {
+        type: values.type.toLowerCase().trim(),
+        percent: numberFormatterFive(values.percent),
+        skill: values.skill.trim(),
+      })
       .then(response => {
         const { message, skill } = response.data;
         addSkillToState(skill);
@@ -108,13 +103,14 @@ const AddSkillForm = ({
   };
   const syncValidate = values => {
     const errors = {};
+    const requiredError = 'Обязательное поле';
 
     Object.keys(initialValues).forEach(key => {
       const value = values[key];
-      if (typeof value === typeof '') {
-        value.trim() ? null : (errors[key] = 'Обязательное поле');
+      if (typeof value === 'string') {
+        value.trim() ? null : (errors[key] = requiredError);
       }
-      value ? null : (errors[key] = 'Обязательное поле');
+      value ? null : (errors[key] = requiredError);
     });
     return errors;
   };
