@@ -1,11 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { StyledList } from '../styledComponents/styledLayouts';
 import Item from '../Item';
 
-const BlogList = props => {
-  const { articles, deleteArticle } = props;
-
+const BlogList = ({ articles, deleteArticle }) => {
   return (
     <StyledList>
       {articles.map(article => (
@@ -13,6 +12,11 @@ const BlogList = props => {
       ))}
     </StyledList>
   );
+};
+
+BlogList.propTypes = {
+  articles: PropTypes.array,
+  deleteArticle: PropTypes.func,
 };
 
 export default BlogList;

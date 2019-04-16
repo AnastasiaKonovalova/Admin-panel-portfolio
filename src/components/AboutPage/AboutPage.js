@@ -8,14 +8,13 @@ import AboutForm from '../AboutForm';
 import ResponseAlert from '../ResponseAlert';
 import AddSkillForm from '../AddSkillForm';
 
-const AboutPage = props => {
+const AboutPage = () => {
   const [responseMessage, setResponseMessage] = useState('');
   const [isAdding, setIsAdding] = useState(false);
   const [stacks, setStack] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('USE EFFECT');
     apiRequest
       .get('/skills')
       .then(response => {

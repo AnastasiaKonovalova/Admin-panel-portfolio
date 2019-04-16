@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 
@@ -22,8 +23,7 @@ const StyledButtonContainer = styled.div`
   margin-top: 10px;
 `;
 
-const BlogForm = props => {
-  const { renderResponse, addArticleToState } = props;
+const BlogForm = ({ renderResponse, addArticleToState }) => {
   const initialValues = { title: '', date: '', text: '' };
 
   const myHandleSubmit = values => {
@@ -121,6 +121,11 @@ const BlogForm = props => {
       )}
     />
   );
+};
+
+BlogForm.propTypes = {
+  renderResponse: PropTypes.func,
+  addArticleToState: PropTypes.func,
 };
 
 export default BlogForm;

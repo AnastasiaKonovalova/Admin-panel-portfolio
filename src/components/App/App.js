@@ -7,6 +7,7 @@ import Navigation from '../Navigation';
 import AboutPage from '../AboutPage';
 import BlogPage from '../BlogPage';
 import WorksPage from '../WorksPage';
+import NotFoundPage from '../NotFoundPage';
 
 import bgImage from '../../img/admin_bg.jpg';
 
@@ -35,6 +36,7 @@ const App = props => {
             <Redirect from="/admin" exact to="/admin/edit-about" />
             <Route path="/admin/edit-works" component={WorksPage} />
             <Route path="/admin/edit-blog" component={BlogPage} />
+            <Route component={NotFoundPage} />
           </Switch>
         </StyledContainer>
       </BrowserRouter>

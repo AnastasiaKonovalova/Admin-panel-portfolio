@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { StyledCloseButton } from '../styledComponents/styledComponents';
@@ -16,16 +17,19 @@ const StyledText = styled.span`
   margin-right: 15px;
 `;
 
-const Item = props => {
-  const { title, _id } = props.content;
-  const { deleteItem } = props;
-
+const Item = ({ content: { title, _id }, deleteItem }) => {
   return (
     <StyledItem>
       <StyledCloseButton onClick={deleteItem(_id)} />
       <StyledText>{title}</StyledText>
     </StyledItem>
   );
+};
+
+Item.propTypes = {
+  title: PropTypes.string,
+  _id: PropTypes.string,
+  deleteItem: PropTypes.func,
 };
 
 export default Item;

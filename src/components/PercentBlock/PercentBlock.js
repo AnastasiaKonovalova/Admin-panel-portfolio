@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Field } from 'react-final-form';
 
@@ -25,7 +26,6 @@ const StyledPercentText = styled.div`
 
 const PercentBlock = ({ id, percent, type }) => {
   const numberNormalizer = value => {
-    // console.log('numberNormalizer');
     if (+value > 100) return '100';
     if (!value || !value.trim) return '';
     const onlyNums = value.replace(/[^\d]/g, '');
@@ -58,6 +58,12 @@ const PercentBlock = ({ id, percent, type }) => {
       <StyledPercentText>%</StyledPercentText>
     </StyledPercentBlock>
   );
+};
+
+PercentBlock.propTypes = {
+  id: PropTypes.string,
+  percent: PropTypes.number,
+  type: PropTypes.string,
 };
 
 export default PercentBlock;

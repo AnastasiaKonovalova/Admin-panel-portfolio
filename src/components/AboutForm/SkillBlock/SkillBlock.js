@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { StyledSubtitle } from '../../styledComponents/styledComponents';
@@ -33,6 +34,12 @@ const SkillBlock = ({ type, skills, mutators }) => {
       </StyledSkillsList>
     </StyledSkillsBlock>
   );
+};
+
+SkillBlock.propTypes = {
+  type: PropTypes.string,
+  skills: PropTypes.array,
+  mutators: PropTypes.object,
 };
 
 export default SkillBlock;

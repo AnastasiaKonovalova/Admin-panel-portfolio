@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form } from 'react-final-form';
 
@@ -136,6 +137,13 @@ const AboutForm = ({
       }}
     />
   );
+};
+
+AboutForm.propTypes = {
+  skills: PropTypes.array,
+  showAddSkillForm: PropTypes.func,
+  renderResponse: PropTypes.func,
+  updateStack: PropTypes.func,
 };
 
 export default AboutForm;

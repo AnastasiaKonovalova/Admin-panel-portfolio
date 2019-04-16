@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { colors } from '../../utilities/colors';
@@ -31,8 +32,7 @@ const StyledText = styled.div`
   margin-bottom: 20px;
 `;
 
-const ResponseAlert = props => {
-  const { message, onClick } = props;
+const ResponseAlert = ({ message, onClick }) => {
   return (
     <StyledWrapper>
       <StyledContainer>
@@ -41,6 +41,11 @@ const ResponseAlert = props => {
       </StyledContainer>
     </StyledWrapper>
   );
+};
+
+ResponseAlert.propTypes = {
+  message: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default ResponseAlert;

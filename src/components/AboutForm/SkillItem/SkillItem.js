@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Field } from 'react-final-form';
 
@@ -82,6 +83,12 @@ const SkillItem = ({ skill, type, mutators }) => {
       <PercentBlock id={skill._id} percent={skill.percent} type={type} />
     </StyledSkillItem>
   );
+};
+
+SkillItem.propTypes = {
+  type: PropTypes.string,
+  skill: PropTypes.object,
+  mutators: PropTypes.object,
 };
 
 export default SkillItem;

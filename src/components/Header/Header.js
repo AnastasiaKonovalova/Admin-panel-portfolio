@@ -52,7 +52,7 @@ const StyledLink = styled.a`
   `}
 `;
 
-const Header = props => {
+const Header = () => {
   return (
     <StyledContainer>
       <StyledHeader>Панель администрирования</StyledHeader>

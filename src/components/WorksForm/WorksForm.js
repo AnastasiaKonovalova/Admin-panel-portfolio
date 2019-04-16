@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import styled from 'styled-components';
 
@@ -63,8 +64,7 @@ const StyledImgContainer = styled.div`
   `}
 `;
 
-const WorksForm = props => {
-  const { renderResponse, addWorkToState } = props;
+const WorksForm = ({ renderResponse, addWorkToState }) => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const initialValues = { title: '', stack: '', file: '', url: '' };
@@ -207,6 +207,11 @@ const WorksForm = props => {
       )}
     />
   );
+};
+
+WorksForm.propTypes = {
+  renderResponse: PropTypes.func,
+  addWorkToState: PropTypes.func,
 };
 
 export default WorksForm;

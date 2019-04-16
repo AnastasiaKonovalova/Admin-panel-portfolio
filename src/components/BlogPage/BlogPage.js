@@ -12,7 +12,7 @@ import BlogForm from '../BlogForm';
 import ResponseAlert from '../ResponseAlert';
 import BlogList from '../BlogList';
 
-const BlogPage = props => {
+const BlogPage = () => {
   const [responseMessage, setResponseMessage] = useState('');
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);

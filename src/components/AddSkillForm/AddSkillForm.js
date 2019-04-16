@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 
@@ -180,6 +181,12 @@ const AddSkillForm = ({
       />
     </StyledFormWrapper>
   );
+};
+
+AddSkillForm.propTypes = {
+  closeAddSkillForm: PropTypes.func,
+  renderResponse: PropTypes.func,
+  addSkillToState: PropTypes.func,
 };
 
 export default AddSkillForm;

@@ -42,7 +42,7 @@ const StyledNavigationPanel = styled.div`
   `}
 `;
 
-const Navigation = props => {
+const Navigation = () => {
   return (
     <StyledNavigationPanel>
       <StyledLink to="/admin/edit-about" activeStyle={activeStyle}>

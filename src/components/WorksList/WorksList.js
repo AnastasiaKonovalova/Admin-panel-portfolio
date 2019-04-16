@@ -1,11 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { StyledList } from '../styledComponents/styledLayouts';
 import Item from '../Item';
 
-const WorksList = props => {
-  const { works, deleteWork } = props;
-
+const WorksList = ({ works, deleteWork }) => {
   return (
     <StyledList>
       {works.map(work => (
@@ -13,6 +12,11 @@ const WorksList = props => {
       ))}
     </StyledList>
   );
+};
+
+WorksList.propTypes = {
+  works: PropTypes.array,
+  deleteWork: PropTypes.func,
 };
 
 export default WorksList;
