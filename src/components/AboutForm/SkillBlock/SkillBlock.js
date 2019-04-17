@@ -10,6 +10,7 @@ const StyledSkillsBlock = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 30px;
+  margin-right: 30px;
 `;
 
 const StyledSkillsList = styled.ul`
@@ -39,7 +40,7 @@ const SkillBlock = ({ type, skills, mutators }) => {
 SkillBlock.propTypes = {
   type: PropTypes.string,
   skills: PropTypes.array,
-  mutators: PropTypes.object,
+  mutators: PropTypes.object
 };
 
 export default SkillBlock;

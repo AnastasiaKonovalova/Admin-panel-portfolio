@@ -4,7 +4,7 @@ import { apiRequest } from '../../utilities/axiosConfig';
 
 import {
   StyledMaincontent,
-  StyledColumn,
+  StyledColumn
 } from '../styledComponents/styledLayouts';
 import { StyledTitle } from '../styledComponents/styledComponents';
 

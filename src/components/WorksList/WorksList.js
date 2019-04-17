@@ -16,7 +16,7 @@ const WorksList = ({ works, deleteWork }) => {
 
 WorksList.propTypes = {
   works: PropTypes.array,
-  deleteWork: PropTypes.func,
+  deleteWork: PropTypes.func
 };
 
 export default WorksList;

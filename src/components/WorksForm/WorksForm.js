@@ -10,7 +10,7 @@ import {
   StyledButton,
   StyledInput,
   StyledErrorSpan,
-  StyledSubtitle,
+  StyledSubtitle
 } from '../styledComponents/styledComponents';
 
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
@@ -73,9 +73,9 @@ const WorksForm = ({ renderResponse, addWorkToState }) => {
     values.file = imageFile;
 
     const data = new FormData();
-    data.set('url', values.url);
-    data.set('stack', values.stack);
-    data.set('title', values.title);
+    data.set('url', values.url.trim());
+    data.set('stack', values.stack.trim());
+    data.set('title', values.title.trim());
     data.set('img', values.file);
 
     apiRequest
@@ -83,7 +83,6 @@ const WorksForm = ({ renderResponse, addWorkToState }) => {
       .then(response => {
         const { message, work } = response.data;
         renderResponse(message);
-        console.log('WorksForm myHandleSubmit response', response);
         addWorkToState(work);
       })
       .catch(error => {
@@ -96,9 +95,13 @@ const WorksForm = ({ renderResponse, addWorkToState }) => {
   };
   const syncValidate = values => {
     const errors = {};
-    Object.keys(initialValues).forEach(key =>
-      values[key] ? null : (errors[key] = 'Обязательное поле')
-    );
+    Object.keys(initialValues).forEach(key => {
+      if (typeof values[key] === 'string') {
+        return values[key].trim() ? null : (errors[key] = 'Обязательное поле');
+      } else {
+        return values[key] ? null : (errors[key] = 'Обязательное поле');
+      }
+    });
     return errors;
   };
   const readFile = onChange => e => {
@@ -211,7 +214,7 @@ const WorksForm = ({ renderResponse, addWorkToState }) => {
 
 WorksForm.propTypes = {
   renderResponse: PropTypes.func,
-  addWorkToState: PropTypes.func,
+  addWorkToState: PropTypes.func
 };
 
 export default WorksForm;

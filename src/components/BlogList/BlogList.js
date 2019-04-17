@@ -16,7 +16,7 @@ const BlogList = ({ articles, deleteArticle }) => {
 
 BlogList.propTypes = {
   articles: PropTypes.array,
-  deleteArticle: PropTypes.func,
+  deleteArticle: PropTypes.func
 };
 
 export default BlogList;

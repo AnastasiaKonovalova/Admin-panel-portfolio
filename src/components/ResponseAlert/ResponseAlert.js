@@ -45,7 +45,7 @@ const ResponseAlert = ({ message, onClick }) => {
 
 ResponseAlert.propTypes = {
   message: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default ResponseAlert;

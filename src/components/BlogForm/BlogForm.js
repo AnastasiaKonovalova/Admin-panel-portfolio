@@ -8,7 +8,7 @@ import {
   StyledInput,
   StyledTextarea,
   StyledErrorSpan,
-  StyledSubtitle,
+  StyledSubtitle
 } from '../styledComponents/styledComponents';
 import { StyledForm, StyledFieldset } from '../styledComponents/styledLayouts';
 import { apiRequest } from '../../utilities/axiosConfig';
@@ -29,12 +29,11 @@ const BlogForm = ({ renderResponse, addArticleToState }) => {
   const myHandleSubmit = values => {
     apiRequest
       .post('/blog', {
-        title: values.title,
+        title: values.title.trim(),
         date: values.date,
-        text: values.text,
+        text: values.text.trim()
       })
       .then(response => {
-        console.log('BlogForm submit response', response);
         const { message, article } = response.data;
         renderResponse(message);
         addArticleToState(article);
@@ -48,9 +47,13 @@ const BlogForm = ({ renderResponse, addArticleToState }) => {
   const syncValidate = values => {
     const errors = {};
 
-    Object.keys(initialValues).forEach(key =>
-      values[key] ? null : (errors[key] = 'Обязательное поле')
-    );
+    Object.keys(initialValues).forEach(key => {
+      if (typeof values[key] === 'string') {
+        return values[key].trim() ? null : (errors[key] = 'Обязательное поле');
+      } else {
+        return values[key] ? null : (errors[key] = 'Обязательное поле');
+      }
+    });
     return errors;
   };
 
@@ -125,7 +128,7 @@ const BlogForm = ({ renderResponse, addArticleToState }) => {
 
 BlogForm.propTypes = {
   renderResponse: PropTypes.func,
-  addArticleToState: PropTypes.func,
+  addArticleToState: PropTypes.func
 };
 
 export default BlogForm;

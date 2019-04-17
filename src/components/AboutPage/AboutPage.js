@@ -19,6 +19,10 @@ const AboutPage = () => {
       .get('/skills')
       .then(response => {
         const { skills } = response.data;
+        skills.sort((a, b) => {
+          if (a.type > b.type) return 1;
+          if (a.type < b.type) return -1;
+        });
         setStack(skills);
       })
       .catch(error => {
@@ -33,8 +37,15 @@ const AboutPage = () => {
   };
 
   const addSkillToState = newStack => {
-    const newState = stacks.filter(stack => stack.type !== newStack.type);
-    setStack([...newState, newStack]);
+    const newState = [
+      ...stacks.filter(stack => stack.type !== newStack.type),
+      newStack
+    ];
+    newState.sort((a, b) => {
+      if (a.type > b.type) return 1;
+      if (a.type < b.type) return -1;
+    });
+    setStack(newState);
   };
   const showAddSkillForm = e => {
     e.preventDefault();

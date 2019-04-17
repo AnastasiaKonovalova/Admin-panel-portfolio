@@ -7,7 +7,7 @@ import { colors } from '../../../utilities/colors';
 import { media } from '../../styledComponents/media';
 import {
   StyledEditButton,
-  StyledCloseButton,
+  StyledCloseButton
 } from '../../styledComponents/styledComponents';
 
 import PercentBlock from '../../PercentBlock';
@@ -88,7 +88,7 @@ const SkillItem = ({ skill, type, mutators }) => {
 SkillItem.propTypes = {
   type: PropTypes.string,
   skill: PropTypes.object,
-  mutators: PropTypes.object,
+  mutators: PropTypes.object
 };
 
 export default SkillItem;

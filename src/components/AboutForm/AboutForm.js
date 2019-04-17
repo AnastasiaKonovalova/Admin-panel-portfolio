@@ -42,7 +42,7 @@ const AboutForm = ({
   skills,
   showAddSkillForm,
   renderResponse,
-  updateStack,
+  updateStack
 }) => {
   const myHandleSubmit = values => {
     const request = {};
@@ -50,7 +50,7 @@ const AboutForm = ({
     Object.keys(values).forEach(key => {
       const stack = values[key];
       const skills = Object.keys(stack).reduce((acc, input, inputIndex) => {
-        if (!stack[input]) {
+        if (typeof stack[input] === 'string' && !stack[input].trim()) {
           return { ...acc };
         }
         return { ...acc, [input]: stack[input] };
@@ -143,7 +143,7 @@ AboutForm.propTypes = {
   skills: PropTypes.array,
   showAddSkillForm: PropTypes.func,
   renderResponse: PropTypes.func,
-  updateStack: PropTypes.func,
+  updateStack: PropTypes.func
 };
 
 export default AboutForm;

@@ -28,7 +28,7 @@ const StyledLink = styled(NavLink)`
 
 const activeStyle = {
   backgroundColor: `${colors.white}`,
-  color: `${colors.lightGreen}`,
+  color: `${colors.lightGreen}`
 };
 
 const StyledNavigationPanel = styled.div`

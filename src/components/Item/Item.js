@@ -29,7 +29,7 @@ const Item = ({ content: { title, _id }, deleteItem }) => {
 Item.propTypes = {
   title: PropTypes.string,
   _id: PropTypes.string,
-  deleteItem: PropTypes.func,
+  deleteItem: PropTypes.func
 };
 
 export default Item;

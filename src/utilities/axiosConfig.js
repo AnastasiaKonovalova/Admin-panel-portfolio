@@ -2,5 +2,5 @@ import axios from 'axios';
 
 export const apiRequest = axios.create({
   baseURL: 'http://localhost:3000/api',
-  mode: 'cors',
+  mode: 'cors'
 });

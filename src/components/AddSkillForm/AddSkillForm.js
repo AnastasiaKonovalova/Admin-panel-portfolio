@@ -6,7 +6,7 @@ import { Form, Field } from 'react-final-form';
 
 import {
   StyledButton,
-  StyledErrorSpan,
+  StyledErrorSpan
 } from '../styledComponents/styledComponents';
 import { StyledFieldset } from '../styledComponents/styledLayouts';
 import PercentBlock from '../PercentBlock';
@@ -78,7 +78,7 @@ const StyledInput = styled.input`
 const AddSkillForm = ({
   closeAddSkillForm,
   renderResponse,
-  addSkillToState,
+  addSkillToState
 }) => {
   const initialValues = { type: '', skill: '', percent: '0' };
 
@@ -87,7 +87,7 @@ const AddSkillForm = ({
       .post('/skills', {
         type: values.type.toLowerCase().trim(),
         percent: numberFormatterFive(values.percent),
-        skill: values.skill.trim(),
+        skill: values.skill.trim()
       })
       .then(response => {
         const { message, skill } = response.data;
@@ -186,7 +186,7 @@ const AddSkillForm = ({
 AddSkillForm.propTypes = {
   closeAddSkillForm: PropTypes.func,
   renderResponse: PropTypes.func,
-  addSkillToState: PropTypes.func,
+  addSkillToState: PropTypes.func
 };
 
 export default AddSkillForm;

@@ -63,7 +63,7 @@ const PercentBlock = ({ id, percent, type }) => {
 PercentBlock.propTypes = {
   id: PropTypes.string,
   percent: PropTypes.number,
-  type: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default PercentBlock;
