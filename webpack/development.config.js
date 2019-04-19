@@ -3,7 +3,9 @@ module.exports = function() {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
-      historyApiFallback: true,
+      historyApiFallback: {
+        rewrites: [{ from: /./, to: 'http://localhost:8080/admin/' }]
+      },
       publicPath: 'http://localhost:8080/admin/',
       openPage: 'admin/'
     },

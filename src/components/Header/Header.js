@@ -56,7 +56,13 @@ const Header = () => {
   return (
     <StyledContainer>
       <StyledHeader>Панель администрирования</StyledHeader>
-      <StyledLink href="http://localhost:3000/">Вернуться на сайт</StyledLink>
+      <StyledLink
+        href={
+          process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '/'
+        }
+      >
+        Вернуться на сайт
+      </StyledLink>
     </StyledContainer>
   );
 };
