@@ -6,7 +6,7 @@
 
 ## Старт проекта
 
-Чтобы оценить полный функционал этого проекта, нужно запустить его вместе с [демонстрационным сервером](https://github.com/AnastasiaKonovalova/Backend-for-portfolio) или заглянуть на [Heroku](https://portfolio-one.herokuapp.com/).
+Этот проект необходимо запускать вместе с [демонстрационным сервером](https://github.com/AnastasiaKonovalova/Backend-for-portfolio) или заглянуть на [Heroku](https://portfolio-one.herokuapp.com/).
 
 ### Склонируйте репозиторий и перейдите в папку проекта
 
